@@ -1,8 +1,8 @@
 module.exports.config = {
-    name: "hugv2",
+    name: "Crush",
     version: "3.1.1",
     hasPermssion: 0,
-    credits: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭",
+    credits: "MR CHAND",
     description: "Hug 🥰",
     commandCategory: "img",
     usages: "[@mention]",
@@ -22,7 +22,7 @@ module.exports.onLoad = async() => {
     const dirMaterial = __dirname + `/cache/canvas/`;
     const path = resolve(__dirname, 'cache/canvas', 'hugv2.png');
     if (!existsSync(dirMaterial + "canvas")) mkdirSync(dirMaterial, { recursive: true });
-    if (!existsSync(path)) await downloadFile("https://i.ibb.co/zRdZJzG/1626342271-28-kartinkin-com-p-anime-obnimashki-v-posteli-anime-krasivo-30.jpg", path);
+    if (!existsSync(path)) await downloadFile("https://i.imgur.com/tWuWCF6.jpg", path);
 }
 
 async function makeImage({ one, two }) {
@@ -45,7 +45,7 @@ async function makeImage({ one, two }) {
     
     let circleOne = await jimp.read(await circle(avatarOne));
     let circleTwo = await jimp.read(await circle(avatarTwo));
-    batgiam_img.composite(circleOne.resize(100, 100), 370, 40).composite(circleTwo.resize(100, 100), 330, 150);
+    batgiam_img.composite(circleOne.resize(200, 200), 100,100).composite(circleTwo.resize(200, 200), 430, 100);
     
     let raw = await batgiam_img.getBufferAsync("image/png");
     
