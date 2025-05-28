@@ -21,12 +21,12 @@ module.exports = {
 
   run: async function ({ api, event, args }) {
     if (!args.length) {
-      return api.sendMessage("❌ Please provide a video title or artist.", event.threadID, event.messageID);
+      return api.sendMessage("ㅤㅤ\n╭═══🅥🅘🅓🅔🅞═══❤╮\n⏤͟͟͞͞◯⬳  😘😘 ᴵᵀˢ ᴹᴱ ˢᴴᴼᴺᴬ ᯤᯱᯱᯱᯱᯱᯱᯱ ᯤᯱᯱᯱ\n   ᶜᴿᴱᴬᵀᴱᴰ ᵇʸ  𓆩♥︎🅐ᴍɪʀ😍𓆪\nᴘʟᴇᴀsᴇ ᴛʏᴘᴇ ᴠɪᴅᴇᴏ ɴᴀᴍᴇ...\n╰❤═════════════╯", event.threadID, event.messageID);
     }
 
     const contentName = args.join(" ");
     const processingMessage = await api.sendMessage(
-      "🔍 Searching and processing your video request. Please wait...",
+      "ㅤㅤ\n╭═══🅥🅘🅓🅔🅞═══❤╮\n⏤͟͟͞͞◯⬳  😘😘 ᴵᵀˢ ᴹᴱ ˢᴴᴼᴺᴬ ᯤᯱᯱᯱᯱᯱᯱᯱ ᯤᯱᯱᯱ\n   ᶜᴿᴱᴬᵀᴱᴰ ᵇʸ  𓆩♥︎🅐ᴍɪʀ😍𓆪\n🅢ᴇᴀʀᴄʜɪɴɢ ᴠɪᴅᴇᴏ...\n╰❤═════════════╯",
       event.threadID,
       null,
       event.messageID
@@ -76,7 +76,7 @@ module.exports = {
       await api.sendMessage(
         {
           attachment: fs.createReadStream(downloadPath),
-          body: `🎬 Video Content:\n\nTitle: ${topResult.title}\nDuration: ${topResult.duration.timestamp}\nViews: ${topResult.views}\nChannel: ${topResult.author.name}`,
+          body: `╭═══🅥🅘🅓🅔🅞═══❤╮\n⏤͟͟͞͞◯⬳  😘😘 ᴵᵀˢ ᴹᴱ ˢᴴᴼᴺᴬ ᯤᯱᯱᯱᯱᯱᯱᯱ ᯤᯱᯱᯱ\n   ᶜᴿᴱᴬᵀᴱᴰ ᵇʸ  𓆩♥︎🅐ᴍɪʀ😍𓆪\nʜᴇʀᴇ ɪs ʏᴏᴜʀ ᴠɪᴅᴇᴏ ᴇɴᴊᴏʏ\n╰❤═════════════╯`,
         },
         event.threadID,
         () => {
