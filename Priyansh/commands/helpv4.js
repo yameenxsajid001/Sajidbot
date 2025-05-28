@@ -109,18 +109,18 @@ const first = numberOfOnePage * page - numberOfOnePage;
     
  const text = `╰♥︎──────────╯     💖\n                 ➥𝗣𝗮𝗴𝗲 :${page}/${Math.ceil(arrayInfo.length/numberOfOnePage)}\n *★O͠W͟͟N͜͡ER͟͟   ཫ 𓆩♥𝙰𝙼𝙸𝚁︎ིྀིྀིྀིྀིྀིྀིྀི𓆪`;
     var link = [
-"https://i.imgur.com/ptYRn5E.jpg",
-"https://i.imgur.com/ptYRn5E.jpg",
-"https://i.imgur.com/ptYRn5E.jpg"      ]
+"https://i.ibb.co/0p86dQLz/44ef51d9d661a55cb737df47e9723ac2-2.jpg",
+"",
+""      ]
      var callback = () => api.sendMessage({ body: siu + "\n" + msg  + text, attachment: fs.createReadStream(__dirname + "/cache/leiamnashelp.jpg")}, event.threadID, () => fs.unlinkSync(__dirname + "/cache/leiamnashelp.jpg"), event.messageID);
     return request(encodeURI(link[Math.floor(Math.random() * link.length)])).pipe(fs.createWriteStream(__dirname + "/cache/leiamnashelp.jpg")).on("close", () => callback());
 	} 
 const leiamname = getText("moduleInfo", command.config.name, command.config.description, `${(command.config.usages) ? command.config.usages : ""}`, command.config.commandCategory, command.config.cooldowns, ((command.config.hasPermssion == 0) ? getText("user") : (command.config.hasPermssion == 1) ? getText("adminGroup") : getText("adminBot")), command.config.credits);
 
   var link = [ 
-"https://i.imgur.com/ptYRn5E.jpg",
-"https://i.imgur.com/ptYRn5E.jpg",
-"https://i.imgur.com/ptYRn5E.jpg"]
+"https://i.ibb.co/0p86dQLz/44ef51d9d661a55cb737df47e9723ac2-2.jpg",
+"",
+""]
     var callback = () => api.sendMessage({ body: leiamname, attachment: fs.createReadStream(__dirname + "/cache/leiamnashelp.jpg")}, event.threadID, () => fs.unlinkSync(__dirname + "/cache/leiamnashelp.jpg"), event.messageID);
     return request(encodeURI(link[Math.floor(Math.random() * link.length)])).pipe(fs.createWriteStream(__dirname + "/cache/leiamnashelp.jpg")).on("close", () => callback());
 };
