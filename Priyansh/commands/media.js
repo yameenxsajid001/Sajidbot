@@ -21,18 +21,18 @@ module.exports = {
 
   run: async function ({ api, event, args }) {
     if (args.length < 2) {
-      return api.sendMessage("❌ Invalid usage. Please use: media [audio/video] [Song Name]", event.threadID, event.messageID);
+      return api.sendMessage("╭═══🅜🅔🅓🅘🅐═══❤╮\n⏤͟͟͞͞◯⬳  😘😘 ᴵᵀˢ ᴹᴱ ˢᴴᴼᴺᴬ ᯤᯱᯱᯱᯱᯱᯱᯱ ᯤᯱᯱᯱ\n   ᶜᴿᴱᴬᵀᴱᴰ ᵇʸ  𓆩♥︎🅐ᴍɪʀ😍𓆪\n❌ ɪɴᴠᴀʟɪᴅ ᴜsᴇ : ᴍᴇᴅɪᴀ ᴀᴜᴅɪᴏ/ᴠɪᴅᴇᴏ (sᴏɴɢ ɴᴀᴍᴇ)✦\n╰❤═════════════╯", event.threadID, event.messageID);
     }
 
     const type = args[0].toLowerCase();
     const contentName = args.slice(1).join(" ");
 
     if (type !== "audio" && type !== "video") {
-      return api.sendMessage("❌ Invalid type. Please specify 'audio' or 'video'.", event.threadID, event.messageID);
+      return api.sendMessage("╭═══🅜🅔🅓🅘🅐═══❤╮\n⏤͟͟͞͞◯⬳  😘😘 ᴵᵀˢ ᴹᴱ ˢᴴᴼᴺᴬ ᯤᯱᯱᯱᯱᯱᯱᯱ ᯤᯱᯱᯱ\n   ᶜᴿᴱᴬᵀᴱᴰ ᵇʸ  𓆩♥︎🅐ᴍɪʀ😍𓆪\n❌ ɪɴᴠᴀʟɪᴅ ᴜsᴇ : ᴍᴇᴅɪᴀ ᴀᴜᴅɪᴏ/ᴠɪᴅᴇᴏ (sᴏɴɢ ɴᴀᴍᴇ)✦\n╰❤═════════════╯", event.threadID, event.messageID);
     }
 
     const processingMessage = await api.sendMessage(
-      "🔍 Searching Please wait...",
+      "ㅤㅤ\n╭═══🅜🅔🅓🅘🅐═══❤╮\n⏤͟͟͞͞◯⬳  😘😘 ᴵᵀˢ ᴹᴱ ˢᴴᴼᴺᴬ ᯤᯱᯱᯱᯱᯱᯱᯱ ᯤᯱᯱᯱ\n   ᶜᴿᴱᴬᵀᴱᴰ ᵇʸ  𓆩♥︎🅐ᴍɪʀ😍𓆪\n🅢ᴇᴀʀᴄʜɪɴɢ...\n╰❤═════════════╯",
       event.threadID,
       null,
       event.messageID
