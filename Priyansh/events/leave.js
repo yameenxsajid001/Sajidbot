@@ -1,0 +1,32 @@
+module.exports.config = {
+	name: "leavej",
+	eventType: ["log:unsubscribe"],
+	version: "1.0.0",
+	credits: "Mirai Team",
+	description: "NYc MoVe",
+	dependencies: {
+		"fs-extra": "",
+		"path": ""
+	}
+};
+
+module.exports.run = async function({ api, event, Users, Threads }) {
+	if (event.logMessageData.leftParticipantFbId == api.getCurrentUserID()) return;
+  const fs = require("fs");
+  const axios = require("axios");
+  let {threadName, participantIDs, imageSrc} = await api.getThreadInfo(event.threadID);
+            const type = (event.author == event.logMessageData.leftParticipantFbId) ? "𝐅𝐚𝐑𝐚𝐑 \n┑(￣▽￣)┍\n\n  ●▬▬▬▬▬▬▬▬▬▬▬▬●\n  ●●●━━━━━◥🖤◤━━━━━●●●" : "𝐌𝐞𝐑𝐚 𝐆𝐫𝐨𝐮𝐩 𝐌𝐞𝐑𝐢 𝐌𝐚𝐫𝐙𝐢 \n<(｀^´)>\n\n  ●▬▬▬▬▬▬▬▬▬▬▬▬●\n  ●●●━━━━━◥🖤◤━━━━━●●●";
+          let pathh = __dirname +`/cache/bye.png`;
+          let name = (await api.getUserInfo(event.logMessageData.leftParticipantFbId))[event.logMessageData.leftParticipantFbId].name
+  let avt = ["https://i.imgur.com/5LvOqCw.jpg", "https://i.imgur.com/jhg6oQy.jpg", "https://i.imgur.com/0Zle5Au.jpg", "https://i.imgur.com/5LvOqCw.jpg"]
+   var avt1 = avt[Math.floor(Math.random() * avt.length)];
+          let image = (
+    await axios.get(`https://free-api.ainz-sama101.repl.co/canvas/goodbye2?name=${name}&uid=${event.logMessageData.leftParticipantFbId}&bg=${avt1}&member=${participantIDs.length}`, {
+      responseType: "arraybuffer",
+    })
+  ).data;
+  fs.writeFileSync(pathh, Buffer.from(image, "utf-8"));
+            api.sendMessage({body:"     \n   ‿︵‿︵ʚ˚̣̣̣͙ɞ・❉・ ʚ˚̣̣̣͙ɞ‿︵‿︵\n─━──❝ 𝐍𝐘𝐜 𝐌𝐨𝐕𝐞 ❞──━─\n ●▬▬▬▬▬▬▬▬▬▬▬▬●\n\n " + name+" ✈️ " + type, attachment: fs.createReadStream(pathh)}, event.threadID)
+	
+}
+
