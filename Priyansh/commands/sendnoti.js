@@ -85,7 +85,7 @@ module.exports.run = async function ({ api, event, args, Users }) {
     if (!args[0]) return api.sendMessage("Please input message", threadID);
     let allThread = global.data.allThreadID || [];
     let can = 0, canNot = 0;
-    let text = `MESSAGE FROM ADMIN \n\nMESSAGE:  ${args.join(" ")}\n\nADMIN NAME: ${await Users.getNameUser(senderID)} `;
+    let text = `╭── •  𝗡𝗼𝘁𝗶𝗳𝗶𝗰𝗮𝘁𝗶𝗼𝗻 • ──♥︎╮\n       𝗙𝗿𝗼𝗺 𝗢𝘄𝗻𝗲𝗿  𓆩♥︎🅐мιяིྀི𓆪\n⧽⧽𝗠𝗲𝘀𝘀𝗮𝗴𝗲 :  ${args.join(" ")}\n╰♥︎────────────────╯`;
     if(event.type == "message_reply") text = await getAtm(messageReply.attachments,  `╭── •  𝗡𝗼𝘁𝗶𝗳𝗶𝗰𝗮𝘁𝗶𝗼𝗻 • ──♥︎╮\n       𝗙𝗿𝗼𝗺 𝗢𝘄𝗻𝗲𝗿  𓆩♥︎🅐мιяིྀི𓆪\n⧽⧽𝗠𝗲𝘀𝘀𝗮𝗴𝗲 : ${args.join(" ")}\n𝗗𝗮𝘁𝗲 ${gio}\n╰♥︎────────────────╯`);
     await new Promise(resolve => {
         allThread.forEach((each) => {
