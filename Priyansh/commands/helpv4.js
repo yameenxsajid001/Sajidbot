@@ -1,104 +1,137 @@
- module.exports.config = {
-	name: "help",
-	version: "1.0.2",
-	hasPermssion: 0,
-	credits: "PetterSever/John Lester",
-	description: "Beginner's Guide",
-	commandCategory: "system",
-	usages: "[Tên module]",
-   usePrefix: false ,
-	cooldowns: 1,
-	envConfig: {
-		autoUnsend: false,
-		delayUnsend: 300
-	}
+module.exports.config = {
+    name: "help",
+    version: "1.1.1",
+    hasPermssion: 0,
+    credits: "Jordan",
+    description: "View command list and info",
+    commandCategory: "tools",
+    usages: "[command name/all]",
+    cooldowns: 0
 };
-
 module.exports.languages = {
-	//"vi": {
-	//	"moduleInfo": "「 %1 」\n%2\n\n❯ Cách sử dụng: %3\n❯ Thuộc nhóm: %4\n❯ Thời gian chờ: %5 giây(s)\n❯ Quyền hạn: %6\n\n» Module code by %7 «",
-	//	"helpList": '[ Hiện tại đang có %1 lệnh có thể sử dụng trên bot này, Sử dụng: "%2help nameCommand" để xem chi tiết cách sử dụng! ]"',
-	//	"user": "Người dùng",
-  //      "adminGroup": "Quản trị viên nhóm",
-  //      "adminBot": "Quản trị viên bot"
-//	},
-	"en": {
-		"moduleInfo": "『 %1 』𒁍\n%2\n\nཫ༄𒁍Usage: %3\n𒁍❯ Category: %4\n𒁍❯ Waiting time: %5 seconds(s)\n𒁍❯ Permission: %6\n\nModule code by %7",
-		"helpList": '[ There are %1 commands on this bot, Use: "%2help nameCommand" to know how to use! ]',
-		"user": "User",
-        "adminGroup": "Admin group",
-        "adminBot": "Admin bot"
-	}
-};
-
-module.exports.handleEvent = function ({ api, event, getText }) {
-	const { commands } = global.client;
-	const { threadID, messageID, body } = event;
-
-	if (!body || typeof body == "undefined" || body.indexOf("help") != 0) return;
-	const splitBody = body.slice(body.indexOf("help")).trim().split(/\s+/);
-	if (splitBody.length == 1 || !commands.has(splitBody[1].toLowerCase())) return;
-	const threadSetting = global.data.threadData.get(parseInt(threadID)) || {};
-	const command = commands.get(splitBody[1].toLowerCase());
-	const prefix = (threadSetting.hasOwnProperty("PREFIX")) ? threadSetting.PREFIX : global.config.PREFIX;
-	return api.sendMessage(getText("moduleInfo", command.config.name, command.config.description, `${prefix}${command.config.name} ${(command.config.usages) ? command.config.usages : ""}`, command.config.commandCategory, command.config.cooldowns, ((command.config.hasPermssion == 0) ? getText("user") : (command.config.hasPermssion == 1) ? getText("adminGroup") : getText("adminBot")), command.config.credits), threadID, messageID);
+    "vi": {},
+    "en": {}
+}
+module.exports.run = async function({
+    api,
+    event,
+    args
+}) {
+    const {
+        threadID: tid,
+        messageID: mid,
+        senderID: sid
+    } = event
+    var type = !args[0] ? "" : args[0].toLowerCase()
+    var msg = "",
+        array = [],
+        i = 0
+  const { events } = global.client;
+    const vjp = process.uptime();
+  var hieu = Math.floor(vjp / (60 * 60));
+  var simp = Math.floor((vjp % (60 * 60)) / 60);
+  var rin = Math.floor(vjp % 60);
+    const cmds = global.client.commands
+    const TIDdata = global.data.threadData.get(tid) || {}
+    var prefix = TIDdata.PREFIX || global.config.PREFIX
+    if (type == "all") {
+        for (const cmd of cmds.values()) {
+            msg += `${++i}. ${cmd.config.name}: ${cmd.config.description}\n`
+        }
+        return api.sendMessage(msg, tid, mid)
+    }
+   // if (type == "all") return
+    if (type) {
+        for (const cmd of cmds.values()) {
+            array.push(cmd.config.name.toString())
+        }
+        if (!array.find(n => n == args[0].toLowerCase())) {
+            const stringSimilarity = require('string-similarity')
+            commandName = args.shift().toLowerCase() || ""
+            var allCommandName = [];
+            const commandValues = cmds['keys']()
+            for (const cmd of commandValues) allCommandName.push(cmd)
+            const checker = stringSimilarity.findBestMatch(commandName, allCommandName)
+            if (checker.bestMatch.rating >= 0.5) command = client.commands.get(checker.bestMatch.target)
+            msg = `Command Not Found '${type}'\nSimilar command found => '${checker.bestMatch.target}'`
+            api.sendMessage(msg, tid, mid)
+        }
+        const cmd = cmds.get(type).config
+        msg = `『 ${cmd.name} 』\n➜ Ban Season : ${cmd.version}\n➜ Trem Book : ${TextPr(cmd.hasPermssion)}\n➜ Author: ${cmd.credits}\n➜ describe: ${cmd.description}\n➜ Belonging to Group : ${cmd.commandCategory}\n➜ How To Used : ${cmd.usages}\n➜ Waiting Time : ${cmd.cooldowns}s`
+        api.sendMessage(msg, tid, mid)
+    } else {
+        CmdCategory()
+        array.sort(S("nameModule"))
+        for (const cmd of array) {
+            msg += `➜ ${++i} ► ${cmd.cmdCategory.toUpperCase()} ◄\n➜ Trem Book : ${TextPr(cmd.permission)}\n➜ Total ${cmd.nameModule.length} command , including :\n➜ ${cmd.nameModule.join(" | ")}\n────────────────────\n`
+        }
+       return api.sendMessage({body: msg += `\n➩ Total number of orders : ${cmds.size}\n➩ ${prefix}help + command name to see details\n➩ ${prefix}help + all to see all commands\n➩ Currently the bot is online in total ${hieu} hour ${simp} minute ${rin} second`,attachment: (await global.nodemodule["axios"]({
+url: (await global.nodemodule["axios"]('https://api-images.duytrollgame.repl.co/rin.php')).data.data,
+method: "GET",
+responseType: "stream"
+})).data
+},event.threadID, event.messageID)
+        api.sendMessage(msg, tid)
+        }
+ global.client.handleReaction.push({
+      name: this.config.name, 
+      messageID: info.messageID,
+      author: event.senderID,
+    })
+module.exports.handleReaction = async ({ event, api, handleReaction, Currencies, Users}) => {
+  const { events } = global.client;
+  const time = process.uptime(),
+		hours = Math.floor(time / (60 * 60)),
+		minutes = Math.floor((time % (60 * 60)) / 60),
+		seconds = Math.floor(time % 60);
+const axios = global.nodemodule["axios"];
+const fs = global.nodemodule["fs-extra"];
+const { threadID, messageID, userID } = event;
+if (event.userID != handleReaction.author) return;
+if (event.reaction != "👍") return; 
+ api.unsendMessage(handleReaction.messageID);
+        var msg = ` the bot is online know ${hours} Hour ${minutes} minutes ${seconds} seconds`
+        return api.sendMessage({body: msg, attachment: (await global.nodemodule["axios"]({
+url: (await global.nodemodule["axios"]('https://api-images.duytrollgame.repl.co/rin.php')).data.data,
+method: "GET",
+responseType: "stream"
+})).data
+},event.threadID); 
+  }
+    function CmdCategory() {
+        for (const cmd of cmds.values()) {
+            const {
+                commandCategory,
+                hasPermssion,
+                name: nameModule
+            } = cmd.config
+            if (!array.find(i => i.cmdCategory == commandCategory)) {
+                array.push({
+                    cmdCategory: commandCategory,
+                    permission: hasPermssion,
+                    nameModule: [nameModule]
+                })
+            } else {
+                const find = array.find(i => i.cmdCategory == commandCategory)
+                find.nameModule.push(nameModule)
+            }
+        }
+    }
 }
 
-module.exports.run = function({ api, event, args, getText }) {
-	const { commands } = global.client;
-	const { threadID, messageID } = event;
-	const command = commands.get((args[0] || "").toLowerCase());
-	const threadSetting = global.data.threadData.get(parseInt(threadID)) || {};
-	const { autoUnsend, delayUnsend } = global.configModule[this.config.name];
-	const prefix = (threadSetting.hasOwnProperty("PREFIX")) ? threadSetting.PREFIX : global.config.PREFIX;
-  if (args.join().indexOf('all')== 0) {
-		const command = commands.values();
-		var group = [], msg = "";
-		for (const commandConfig of command) {
-			if (!group.some(item => item.group.toLowerCase() == commandConfig.config.commandCategory.toLowerCase())) group.push({ group: commandConfig.config.commandCategory.toLowerCase(), cmds: [commandConfig.config.name] });
-			else group.find(item => item.group.toLowerCase() == commandConfig.config.commandCategory.toLowerCase()).cmds.push(commandConfig.config.name);
-		}
-		group.forEach(commandGroup => msg += `『 ${commandGroup.group.charAt(0).toUpperCase() + commandGroup.group.slice(1)} 』\n${commandGroup.cmds.join(', ')}\n\n`);
-
-    const moduleName = this.config.name;
-		return api.sendMessage(msg + ``, event.threadID, (err, info) => {
-      setTimeout(() => {api.unsendMessage(info.messageID)}, 120000)
-    }, event.messageID);
-  }
-
-	if (!command) {
-		const arrayInfo = [];
-		const page = parseInt(args[0]) || 1;
-    const numberOfOnePage = 10;
-    //*số thứ tự 1 2 3.....cú pháp ${++i}*//
-    let i = 0;
-    let msg = "";
-    
-    for (var [name, value] of (commands)) {
-      name += ``;
-      arrayInfo.push(name);
+function S(k) {
+    return function(a, b) {
+        let i = 0;
+        if (a[k].length > b[k].length) {
+            i = 1
+        } else if (a[k].length < b[k].length) {
+            i = -1
+        }
+        return i * -1
     }
+}
 
-    arrayInfo.sort((a, b) => a.data - b.data);
-    
-    const startSlice = numberOfOnePage*page - numberOfOnePage;
-    i = startSlice;
-    const returnArray = arrayInfo.slice(startSlice, startSlice + numberOfOnePage);
-    
-    for (let item of returnArray) msg += `『 ${i++} 』𒁍${prefix}${item}𒁍 ${commands.get(item).config.usages}\n`;
-    
-    
-    const siu = `✦ 𝗖𝗢𝗠𝗠𝗔𝗡𝗗𝗦 𝗟𝗜𝗦𝗧 ✦`;
-    
- const text = `\n 𝗣𝗮𝗚𝗲 (${page}/${Math.ceil(arrayInfo.length/numberOfOnePage)})\n\n𝗢𝗼𝗿 𝗖𝗼𝗺𝗺𝗮𝗻𝗱𝘀 𝗞𝗲 𝗟𝗶𝗬𝗲 ${global.config.PREFIX}𝗛𝗲𝗹𝗽 2 𝗛𝗲𝗹𝗽 3 𝗜𝘀𝗧𝗿𝗵𝗮𝗻 𝗨𝘀𝗲𝗱 𝗞𝗿𝗲𝗻 ಠ⁠◡⁠ಠ\n 𝗢𝘄𝗻𝗲𝗿 = ✦❥⋆⃝𝗝𝗢𝗥𝗗𝗔𝗡 ✦  `;
- 
-    return api.sendMessage(siu + "\n\n" + msg  + text, threadID, async (error, info) => {
-			if (autoUnsend) {
-				await new Promise(resolve => setTimeout(resolve, delayUnsend * 1000));
-				return api.unsendMessage(info.messageID);
-			} else return;
-		}, event.messageID);
-	}
-
-	return api.sendMessage(getText("moduleInfo", command.config.name, command.config.description, `${prefix}${command.config.name} ${(command.config.usages) ? command.config.usages : ""}`, command.config.commandCategory, command.config.cooldowns, ((command.config.hasPermssion == 0) ? getText("user") : (command.config.hasPermssion == 1) ? getText("adminGroup") : getText("adminBot")), command.config.credits), threadID, messageID);
-};
+function TextPr(permission) {
+    p = permission
+    return p == 0 ? "Member" : p == 1 ? "Qtv group" : p = 2 ? "Admin Bot" : "governor"
+              }
