@@ -18,7 +18,7 @@ module.exports.run = async function({ api, event, args }) {
   } 
   
   try {
-    api.sendMessage(`🔍 "${txt}"`, event.threadID, event.messageID); 
+    api.sendMessage(`Typing...`, event.threadID, event.messageID); 
     const res = await b.get(`https://ccprojectsapis.zetsu.xyz/api/gpt3?ask=${encodeURIComponent(txt)}`); 
     
     // Handle the response format where data comes in res.data.data
