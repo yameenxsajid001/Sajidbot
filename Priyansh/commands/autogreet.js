@@ -2,7 +2,7 @@ module.exports.config = {
 name: "Auto-Greetings",
 version: "10.02",
 hasPermssion: 0,
-credits: "tromoxx",
+credits: "tromox",
 description: "Auto-greetings All box",
 commandCategory: "Auto-Greet by Amir",
 usages: "[]",
