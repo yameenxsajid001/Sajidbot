@@ -15,7 +15,7 @@ module.exports.config = {
 };
 
 module.exports.run = async function ({ api, event, args }) {
-    const pogi = [""]
+    const pogi = ["100000856538718"]
              if (!pogi.includes(event.senderID))
              return api.sendMessage("╭───────────♥︎╮\n➡➤𝐈 𝐂𝐀𝐍'𝐓 𝐀𝐋𝐋𝐎𝐖 𝐔\n➥Dont angry I give U\n➤ Kiss💋💋\n╰♥︎───────────╯", event.threadID, event.messageID);
     const axios = require('axios');
