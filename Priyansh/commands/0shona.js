@@ -1,8 +1,8 @@
 module.exports.config = { 
-  name: 'shona', 
+  name: 'Ai', 
   version: '1.1.1', 
   hasPermssion: 0, 
-  credits: 'Deku', 
+  credits: 'JORDAN', 
   description: 'ChatGPT', 
   commandCategory: '....', 
   usages: 'Ai [question]', 
@@ -14,7 +14,7 @@ module.exports.run = async function({ api, event, args }) {
   let txt = args.join(" "); 
   
   if (!txt) { 
-    return api.sendMessage("✦ 𝐆 𝐒𝐡𝐎𝐧𝐚 𝐊𝐢 𝐉𝐚𝐚𝐍 𝐇𝐮𝐊𝐦 ✦..", event.threadID, event.messageID);
+    return api.sendMessage("✦ 𝐆 𝐇𝐮𝐊𝐦 ✦..", event.threadID, event.messageID);
   } 
   
   try {
