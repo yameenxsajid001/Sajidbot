@@ -44,7 +44,7 @@ module.exports.handleEvent = async function({ api, event }) {
       let question = chat.join(" ");
       
       try {
-        api.sendMessage(`🔍 "${question}"`, event.threadID, event.messageID); 
+        api.sendMessage(`Typing...`, event.threadID, event.messageID); 
         const res = await b.get(`https://ccprojectsapis.zetsu.xyz/api/gpt3?ask=${encodeURIComponent(question)}`);
         
         // Handle the response format where data comes in res.data.data
