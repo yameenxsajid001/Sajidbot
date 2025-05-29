@@ -4,7 +4,7 @@ if (!fs.existsSync(pathFile))
   fs.writeFileSync(pathFile, 'false');
   
 module.exports.config = {
-	name: "atoseen",
+	name: "autoseen",
 	version: "1.0.0",
 	hasPermssion: 2,
 	credits: "JORDANOFFICIAL",
