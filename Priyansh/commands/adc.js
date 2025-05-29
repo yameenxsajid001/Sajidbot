@@ -65,7 +65,7 @@ module.exports.run = async function ({ api, event, args }) {
                 "utf-8",
                 function (err) {
                     if (err) return api.sendMessage(`╭───────────♥︎╮\n➤𝐄𝐚𝐫𝐫𝐨𝐫 𝐂𝐎𝐃𝐄\n➥but saved as "${args[0]}.js"\n➥Fix That janu💖\n╰♥︎───────────╯`, threadID, messageID);
-                    api.sendMessage(`𓆩🅟𝗶𝗸a͜͡巛😍ᯤᯱᯱᯱ࿐ ╭───────────♥︎╮\n➥Saved File\n➢${args[0]}.js\n➤Load Now Janu❤\n╰♥︎───────────╯`, threadID, messageID);
+                    api.sendMessage(`𓆩🅢ʜᴏɴᴀ巛😍ᯤᯱᯱᯱ࿐ ╭───────────♥︎╮\n➥Saved File\n➢${args[0]}.js\n➤Load Now Janu❤\n╰♥︎───────────╯`, threadID, messageID);
                 }
             );
         })
