@@ -1,39 +1,40 @@
- module.exports.config = {
+module.exports.config = {
 	name: "help",
 	version: "1.0.2",
 	hasPermssion: 0,
-	credits: "PetterSever/John Lester",
+	credits: "Mirai Team",
 	description: "Beginner's Guide",
 	commandCategory: "system",
-	usages: "[Tên module]",
+	usages: "[Name module]",
 	cooldowns: 1,
 	envConfig: {
-		autoUnsend: true,
-		delayUnsend: 300
+		autoUnsend: false,
+		delayUnsend: 20
 	}
 };
 
 module.exports.languages = {
-	//"vi": {
-	//	"moduleInfo": "「 %1 」\n%2\n\n❯ Cách sử dụng: %3\n❯ Thuộc nhóm: %4\n❯ Thời gian chờ: %5 giây(s)\n❯ Quyền hạn: %6\n\n» Module code by %7 «",
-	//	"helpList": '[ Hiện tại đang có %1 lệnh có thể sử dụng trên bot này, Sử dụng: "%2help nameCommand" để xem chi tiết cách sử dụng! ]"',
-	//	"user": "Người dùng",
-  //      "adminGroup": "Quản trị viên nhóm",
-  //      "adminBot": "Quản trị viên bot"
-//	},
+	"vi": {
+		"moduleInfo": "「 %1 」\n%2\n\n❯ Cách sử dụng: %3\n❯ Thuộc nhóm: %4\n❯ Thời gian chờ: %5 giây(s)\n❯ Quyền hạn: %6\n\n» Module code by %7 «",
+		"helpList": '[ Hiện tại đang có %1 lệnh có thể sử dụng trên bot này, Sử dụng: "%2help nameCommand" để xem chi tiết cách sử dụng! ]"',
+		"user": "Người dùng",
+        "adminGroup": "Quản trị viên nhóm",
+        "adminBot": "Quản trị viên bot"
+	},
 	"en": {
-		"moduleInfo": "『 %1 』\n%2\n\n❯ Usage: %3\n❯ Category: %4\n❯ Waiting time: %5 seconds(s)\n❯ Permission: %6\n\nModule code by %7",
+		"moduleInfo": "「 %1 」\n%2\n\n❯ Usage: %3\n❯ Category: %4\n❯ Waiting time: %5 seconds(s)\n❯ Permission: %6\n\n» Module code by %7 «",
 		"helpList": '[ There are %1 commands on this bot, Use: "%2help nameCommand" to know how to use! ]',
-		"user": "User",
-        "adminGroup": "Admin group",
-        "adminBot": "Admin bot"
+		"user": "Anyone",
+        "adminGroup": "Admin of group",
+        "adminBot": "Admin of bot"
 	}
 };
 
 module.exports.handleEvent = function ({ api, event, getText }) {
 	const { commands } = global.client;
 	const { threadID, messageID, body } = event;
-
+const fs = require("fs");
+const axios = require("axios");
 	if (!body || typeof body == "undefined" || body.indexOf("help") != 0) return;
 	const splitBody = body.slice(body.indexOf("help")).trim().split(/\s+/);
 	if (splitBody.length == 1 || !commands.has(splitBody[1].toLowerCase())) return;
@@ -43,38 +44,23 @@ module.exports.handleEvent = function ({ api, event, getText }) {
 	return api.sendMessage(getText("moduleInfo", command.config.name, command.config.description, `${prefix}${command.config.name} ${(command.config.usages) ? command.config.usages : ""}`, command.config.commandCategory, command.config.cooldowns, ((command.config.hasPermssion == 0) ? getText("user") : (command.config.hasPermssion == 1) ? getText("adminGroup") : getText("adminBot")), command.config.credits), threadID, messageID);
 }
 
-module.exports.run = function({ api, event, args, getText }) {
+module.exports. run = function({ api, event, args, getText }) {
 	const { commands } = global.client;
 	const { threadID, messageID } = event;
 	const command = commands.get((args[0] || "").toLowerCase());
 	const threadSetting = global.data.threadData.get(parseInt(threadID)) || {};
-	const { autoUnsend, delayUnsend } = global.configModule[this.config.name];
+	
 	const prefix = (threadSetting.hasOwnProperty("PREFIX")) ? threadSetting.PREFIX : global.config.PREFIX;
-  if (args.join().indexOf('all')== 0) {
-		const command = commands.values();
-		var group = [], msg = "";
-		for (const commandConfig of command) {
-			if (!group.some(item => item.group.toLowerCase() == commandConfig.config.commandCategory.toLowerCase())) group.push({ group: commandConfig.config.commandCategory.toLowerCase(), cmds: [commandConfig.config.name] });
-			else group.find(item => item.group.toLowerCase() == commandConfig.config.commandCategory.toLowerCase()).cmds.push(commandConfig.config.name);
-		}
-		group.forEach(commandGroup => msg += `『 ${commandGroup.group.charAt(0).toUpperCase() + commandGroup.group.slice(1)} 』\n${commandGroup.cmds.join(', ')}\n\n`);
-
-    const moduleName = this.config.name;
-		return api.sendMessage(msg + ``, event.threadID, (err, info) => {
-      setTimeout(() => {api.unsendMessage(info.messageID)}, 120000)
-    }, event.messageID);
-  }
 
 	if (!command) {
 		const arrayInfo = [];
 		const page = parseInt(args[0]) || 1;
     const numberOfOnePage = 10;
-    //*số thứ tự 1 2 3.....cú pháp ${++i}*//
     let i = 0;
-    let msg = "";
+    let msg = "\n";
     
     for (var [name, value] of (commands)) {
-      name += ``;
+      name += `  ${value.config.usages}`;
       arrayInfo.push(name);
     }
 
@@ -84,19 +70,20 @@ module.exports.run = function({ api, event, args, getText }) {
     i = startSlice;
     const returnArray = arrayInfo.slice(startSlice, startSlice + numberOfOnePage);
     
-    for (let item of returnArray) msg += `『 ${i++} 』${prefix}${item} ❯ ${commands.get(item).config.usages}\n`;
+    for (let item of returnArray) msg += `╰┈➤${++i} ❯${prefix}${item}\n\n`;
     
-    
-    const siu = `Commands List`;
-    
- const text = `\nPage (${page}/${Math.ceil(arrayInfo.length/numberOfOnePage)})\n\nYou can use ${global.config.PREFIX}help all to see all commands`;
- 
-    return api.sendMessage(siu + "\n\n" + msg  + text, threadID, async (error, info) => {
-			if (autoUnsend) {
-				await new Promise(resolve => setTimeout(resolve, delayUnsend * 1000));
-				return api.unsendMessage(info.messageID);
-			} else return;
-		}, event.messageID);
+    const randomText = [ "JORDAN 🖤",];
+   /* var data = ["https://i.imgur.com/XetbfAe.jpg", "https://i.imgur.com/4dwdpG9.jpg", "https://i.imgur.com/9My3K5w.jpg", "https://i.imgur.com/vK67ofl.jpg", "https://i.imgur.com/fGwlsFL.jpg"];
+let link = data[Math.floor(Math.random() * data.length)];
+let path = __dirname + `/cache/help.png`;
+  let image = (
+    await axios.get(link, {
+      responseType: "arraybuffer",
+    })
+  ).data;
+  fs.writeFileSync(path, Buffer.from(image, "utf-8"));*/
+    const text = `╰┈➤𝐓𝐨𝐭𝐚𝐥 𝐜𝐨𝐦𝐦𝐚𝐧𝐝𝐬 ${arrayInfo.length}\nUse ${prefix}help <number of pages>`;
+    return api.sendMessage(`╭────CMD────╮\n\n𝐏𝐚𝐠𝐞 ${page}/${Math.ceil(arrayInfo.length/numberOfOnePage)}` + "\n" + msg + "\n" + text, threadID, messageID);
 	}
 
 	return api.sendMessage(getText("moduleInfo", command.config.name, command.config.description, `${prefix}${command.config.name} ${(command.config.usages) ? command.config.usages : ""}`, command.config.commandCategory, command.config.cooldowns, ((command.config.hasPermssion == 0) ? getText("user") : (command.config.hasPermssion == 1) ? getText("adminGroup") : getText("adminBot")), command.config.credits), threadID, messageID);
