@@ -1,11 +1,12 @@
 module.exports.config = {
-	name: "unsend",
+	name: "uns",
 	version: "1.0.1",
 	hasPermssion: 0,
-	credits: "𝙈𝙧𝙏𝙤𝙢𝙓𝙭𝙓",
-	description: "Remove bot's message",
+	credits: "Mirai Team",
+	description: "Delete BoT msg",
 	commandCategory: "system",
-	usages: "unsend",
+	usages: "reply uns",
+  usePrefix: false ,
 	cooldowns: 0
 };
 
@@ -15,8 +16,8 @@ module.exports.languages = {
 		"missingReply": "Hãy reply tin nhắn cần gỡ."
 	},
 	"en": {
-		"returnCant": "Can't to unsend message from other user.",
-		"missingReply": "Reply to the message you want to unsend."
+		"returnCant": "Aby LoL Main Kisi 0or Ka Msg Q Unsent Krun 😒",
+		"missingReply": "BaBe RePly Kro Us Msg Ka J0o UnSent KRrna"
 	}
 }
 
