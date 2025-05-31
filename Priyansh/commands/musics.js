@@ -1,98 +1,95 @@
-const axios = require("axios");
-const fs = require("fs");
-const path = require("path");
-const ytSearch = require("yt-search");
+module.exports.config = {
+  name: "music",
+  version: "2.0.4",
+  hasPermssion: 0,
+  credits: "𒄬• 𝐅𝐚𝐫𝐞𝐁𝐢𝐢𝐰 ː͢» ⸙",
+  description: "Play music",
+  prefix: true,
+  usePrefix: true,
+  commandCategory: "utility",
+  usages: "music [your music title]",
+  cooldowns: 5,
+  dependencies: {
+    "fs-extra": "",
+    "request": "",
+    "axios": "",
+    "@distube/ytdl-core": "",
+    "yt-search": ""
+  }
+};
 
-module.exports = {
-  config: {
-    name: "music",
-    version: "1.0.0",
-    hasPermssion: 0,
-    credits: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭",
-    description: "Download YouTube content as audio",
-    commandCategory: "Media",
-    usages: "[songName/artist]",
-    cooldowns: 5,
-    dependencies: {
-      "node-fetch": "",
-      "yt-search": "",
-    },
-  },
+module.exports.run = async ({ api, event }) => {
+  const axios = require("axios");
+  const fs = require("fs-extra");
+  const ytdl = require("@distube/ytdl-core");
+  const request = require("request");
+  const yts = require("yt-search");
 
-  run: async function ({ api, event, args }) {
-    if (!args.length) {
-      return api.sendMessage("╭═══🅜🅤🅢🅘🅒═══❤╮\n⏤͟͟͞͞◯⬳  😘😘 ᴵᵀˢ ᴹᴱ ˢᴴᴼᴺᴬ ᯤᯱᯱᯱᯱᯱᯱᯱ ᯤᯱᯱᯱ\n   ᶜᴿᴱᴬᵀᴱᴰ ᵇʸ  𓆩♥︎🅐ᴍɪʀ😍𓆪\nᴘʟᴇᴀsᴇ ᴛʏᴘᴇ sᴏɴɢ ɴᴀᴍᴇ...\n╰❤═════════════╯", event.threadID, event.messageID);
+  const input = event.body;
+  const text = input.substring(12);
+  const data = input.split(" ");
+
+  if (data.length < 2) {
+    return api.sendMessage(`「 🎵 𝗠𝘂𝘀𝗶𝗰 🎵 」
+
+𝐏𝐥𝐞𝐚𝐬𝐞 𝐄𝐧𝐭𝐞𝐫 𝐒𝐨𝐧𝐠 𝐍𝐚𝐌𝐞...`, event.threadID);
+  }
+
+  data.shift();
+  const song = data.join(" ");
+
+  try {
+    api.sendMessage(`‎「 🎵 𝗣𝗿𝗼𝗰𝗲𝘀𝘀𝗶𝗻𝗴 🎵 」
+
+𝐏𝐥𝐞𝐚𝐬𝐞 𝐖𝐚𝐢𝐓 𝐒𝐨𝐌𝐞 𝐒𝐞𝐜𝐨𝐧𝐝𝐬..`, event.threadID);
+
+    const res = await axios.get(`https://amir-all-in-1-apis-12bp.onrender.com/api/search/youtube?query=${encodeURIComponent(song)}`);
+
+    const searchResults = await yts(song);
+    if (!searchResults.videos.length) {
+      return api.sendMessage("Error: Invalid request.", event.threadID, event.messageID);
     }
 
-    const contentName = args.join(" ");
-    const processingMessage = await api.sendMessage(
-      "╭═══🅜🅤🅢🅘🅒═══❤╮\n⏤͟͟͞͞◯⬳  😘😘 ᴵᵀˢ ᴹᴱ ˢᴴᴼᴺᴬ ᯤᯱᯱᯱᯱᯱᯱᯱ ᯤᯱᯱᯱ\n   ᶜᴿᴱᴬᵀᴱᴰ ᵇʸ  𓆩♥︎🅐ᴍɪʀ😍𓆪\n🅢ᴇᴀʀᴄʜɪɴɢ ᴍᴜsɪᴄ...\n╰❤═════════════╯",
-      event.threadID,
-      null,
-      event.messageID
-    );
+    const video = searchResults.videos[0];
+    const videoUrl = video.url;
 
-    try {
-      const searchResults = await ytSearch(contentName);
-      if (!searchResults || !searchResults.videos.length) {
-        throw new Error("No results found for your search query.");
+    const stream = ytdl(videoUrl, { filter: "audioonly" });
+
+    const fileName = `${event.senderID}.mp3`;
+    const filePath = __dirname + `/cache/${fileName}`;
+
+    stream.pipe(fs.createWriteStream(filePath));
+
+    stream.on('response', () => {
+      console.info('[DOWNLOADER]', 'Starting download now!');
+    });
+
+    stream.on('info', (info) => {
+      console.info('[DOWNLOADER]', `Downloading ${info.videoDetails.title} by ${info.videoDetails.author.name}`);
+    });
+
+    stream.on('end', () => {
+      console.info('[DOWNLOADER] Downloaded');
+
+      if (fs.statSync(filePath).size > 26214400) {
+        fs.unlinkSync(filePath);
+        return api.sendMessage('⚠ | ERROR The file could not be sent because it is larger than 25MB.', event.threadID);
       }
 
-      const topResult = searchResults.videos[0];
-      const videoId = topResult.videoId;
+      const message = {
+        body: `‎「 🎵 𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱𝗲𝗱 🎵 」
 
-      const apiKey = "priyansh-here";
-      const apiUrl = `https://priyansh-ai.onrender.com/youtube?id=${videoId}&type=audio&apikey=${apiKey}`;
+𝐇𝐞𝐫𝐞 𝐢𝐬 𝐘𝐨𝐮𝐫 𝐌𝐮𝐬𝐢𝐜 𝐄𝐧𝐉𝐨𝐲.💙
+𝗖𝗿𝗲𝗱𝗶𝘁𝘀: 𒄬• 𝐅𝐚𝐫𝐞𝐁𝐢𝐢𝐰 ː͢» ⸙`,
+        attachment: fs.createReadStream(filePath)
+      };
 
-      api.setMessageReaction("⌛", event.messageID, () => {}, true);
-
-      const downloadResponse = await axios.get(apiUrl);
-      const downloadUrl = downloadResponse.data.downloadUrl;
-
-      const safeTitle = topResult.title.replace(/[^a-zA-Z0-9 \-_]/g, "");
-      const filename = `${safeTitle}.mp3`;
-      const downloadPath = path.join(__dirname, "cache", filename);
-
-      if (!fs.existsSync(path.dirname(downloadPath))) {
-        fs.mkdirSync(path.dirname(downloadPath), { recursive: true });
-      }
-
-      const response = await axios({
-        url: downloadUrl,
-        method: "GET",
-        responseType: "stream",
+      api.sendMessage(message, event.threadID, () => {
+        fs.unlinkSync(filePath);
       });
-
-      const fileStream = fs.createWriteStream(downloadPath);
-      response.data.pipe(fileStream);
-
-      await new Promise((resolve, reject) => {
-        fileStream.on("finish", resolve);
-        fileStream.on("error", reject);
-      });
-
-      api.setMessageReaction("✅", event.messageID, () => {}, true);
-
-      await api.sendMessage(
-        {
-          attachment: fs.createReadStream(downloadPath),
-          body: `🎧 Audio Track:\n\nTitle: ${topResult.title}\nDuration: ${topResult.duration.timestamp}\nViews: ${topResult.views}`,
-        },
-        event.threadID,
-        () => {
-          fs.unlinkSync(downloadPath);
-          api.unsendMessage(processingMessage.messageID);
-        },
-        event.messageID
-      );
-    } catch (error) {
-      console.error(`Failed to download audio: ${error.message}`);
-      api.sendMessage(
-        `❌ Failed to download audio: ${error.message}`,
-        event.threadID,
-        event.messageID
-      );
-      api.unsendMessage(processingMessage.messageID);
-    }
-  },
+    });
+  } catch (error) {
+    console.error('[ERROR]', error);
+    api.sendMessage('An error occurred while processing the command.', event.threadID);
+  }
 };
