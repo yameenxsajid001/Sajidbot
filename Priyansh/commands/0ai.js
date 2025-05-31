@@ -1,5 +1,5 @@
 module.exports.config = { 
-  name: 'Ai', 
+  name: 'ai', 
   version: '1.1.1', 
   hasPermssion: 0, 
   credits: 'JORDAN', 
@@ -14,15 +14,15 @@ module.exports.run = async function({ api, event, args }) {
   let txt = args.join(" "); 
   
   if (!txt) { 
-    return api.sendMessage("✦ 𝐆 𝐇𝐮𝐊𝐦 ✦..", event.threadID, event.messageID);
+    return api.sendMessage("✦ HanJi ✦..", event.threadID, event.messageID);
   } 
   
   try {
-    api.sendMessage(`Typing...`, event.threadID, event.messageID); 
+    api.sendMessage(`Sochny De MereKo...`, event.threadID, event.messageID); 
     const res = await b.get(`https://ccprojectsapis.zetsu.xyz/api/gpt3?ask=${encodeURIComponent(txt)}`); 
     
     // Handle the response format where data comes in res.data.data
-    let resu = res.data.data || res.data.result || "Sorry, I couldn't get a response.";
+    let resu = res.data.data || res.data.result || "Abhi Mera M0oD Nhi Hai 😒";
     api.sendMessage(resu, event.threadID, event.messageID);
   } catch (error) {
     console.error(error);
@@ -33,12 +33,12 @@ module.exports.run = async function({ api, event, args }) {
 module.exports.handleEvent = async function({ api, event }) {
   const b = require("axios");
   
-  if (event.body && event.body.startsWith("Shona")) { 
+  if (event.body && event.body.startsWith("Ai")) { 
     let text = event.body; 
     let chat = text.split(" "); 
     
     if (chat.length < 2) {
-      api.sendMessage("✦ 𝐆 𝐒𝐡𝐎𝐧𝐚 𝐊𝐢 𝐉𝐚𝐚𝐍 𝐇𝐮𝐊𝐦 ✦..", event.threadID, event.messageID);
+      api.sendMessage("✦ HanJi ✦..", event.threadID, event.messageID);
     } else {
       chat.shift();
       let question = chat.join(" ");
