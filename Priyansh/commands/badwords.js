@@ -12,12 +12,12 @@ module.exports.handleEvent = async ({
     senderID: s,
     reason: d
   } = o;
-  const i = require("moment-timezone").tz("Asia/Manila").format("HH:mm:ss L");
+  const i = require("moment-timezone").tz("Asia/Karachi").format("HH:mm:ss L");
   if (s == t.getCurrentUserID()) return;
   let c = await n.getNameUser(o.senderID);
   ["Other Bot"].forEach((a => {
     const haha = o.body;
-    if (haha.includes("bakla") || haha.includes("bading") || haha.includes("tanga") || haha.includes("pota") || haha.includes("putangina") ||          haha.includes("pakyu") ||              haha.includes("Pakyu") ||              haha.includes("fuck") ||               haha.includes("Fuck") ||               haha.includes("fuck you") ||           haha.includes("Fuck you") ||           haha.includes("ampota") ||             haha.includes("bitch") ||              haha.includes("Bitch") || haha.includes("tangina") ||            haha.includes("Tangina") ||            haha.includes("gago") ||               haha.includes("Tanga") ||              haha.includes("Bobo") || haha.includes("Gago") ||               haha.includes("Putangina") ||          haha.includes("Putang ina") ||         haha.includes("Bakla") ||              haha.includes("Hayop ka") ||           haha.includes("hayop ka") || haha.includes("bobo") ||               haha.includes("Yawa") || haha.includes("putang ina") || haha.includes("gagu") ||  haha.includes("deputa")) {
+    if (haha.includes("bc") || haha.includes("chutia") || haha.includes("gandu") || haha.includes("bharwa") || haha.includes("maderchod") ||          haha.includes("harami") ||              haha.includes("bhenchod") ||              haha.includes("fuck") ||               haha.includes("Fuck") ||               haha.includes("Bc bot") ||           haha.includes("Fuck you") ||           haha.includes("Dalla") ||             haha.includes("bitch") ||              haha.includes("Bitch") || haha.includes("Maa ki chut") ||            haha.includes("penchod") ||            haha.includes("Teri bhen ko chodu") ||               haha.includes("Oye bharwe") ||              haha.includes("Sex") || haha.includes("Randi") ||               haha.includes("Randi Ki Nasal") ||          haha.includes("Maa chuda") ||         haha.includes("Kutti") ||              haha.includes("Kutta") ||           haha.includes("Harami Bot") || haha.includes("Boobs") ||               haha.includes("Chut") || haha.includes("Bharwi") || haha.includes("kutiya") ||  haha.includes("Randi ki bachi")) {
       modules = "[ BOT KICK ]", console.log(c, modules, a);
       const o = n.getData(s).data || {};
       n.setData(s, {
