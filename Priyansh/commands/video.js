@@ -1,98 +1,103 @@
-const axios = require("axios");
-const fs = require("fs");
-const path = require("path");
-const ytSearch = require("yt-search");
+module.exports.config = {
+  name: "video",
+  version: "1.0.0",
+  hasPermssion: 0,
+  credits: "𒄬• 𝐅𝐚𝐫𝐞𝐁𝐢𝐢𝐰 ː͢» ⸙",
+  description: "Download videos from YouTube",
+  prefix: true,
+  usePrefix: true,
+  commandCategory: "utility",
+  usages: "video [search query]",
+  cooldowns: 5,
+  dependencies: {
+    "fs-extra": "",
+    "axios": ""
+  }
+};
 
-module.exports = {
-  config: {
-    name: "video",
-    version: "1.0.0",
-    hasPermssion: 0,
-    credits: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭",
-    description: "Download YouTube content as video",
-    commandCategory: "Media",
-    usages: "[videoTitle/artist]",
-    cooldowns: 5,
-    dependencies: {
-      "node-fetch": "",
-      "yt-search": "",
-    },
-  },
+module.exports.run = async ({ api, event, args }) => {
+  const axios = require("axios");
+  const fs = require("fs-extra");
 
-  run: async function ({ api, event, args }) {
-    if (!args.length) {
-      return api.sendMessage("╭═══🅥🅘🅓🅔🅞═══❤╮\n⏤͟͟͞͞◯⬳  😘😘 ᴵᵀˢ ᴹᴱ ˢᴴᴼᴺᴬ ᯤᯱᯱᯱᯱᯱᯱᯱ ᯤᯱᯱᯱ\n   ᶜᴿᴱᴬᵀᴱᴰ ᵇʸ  𓆩♥︎🅐ᴍɪʀ😍𓆪\nᴘʟᴇᴀsᴇ ᴛʏᴘᴇ ᴠɪᴅᴇᴏ ɴᴀᴍᴇ...\n╰❤═════════════╯", event.threadID, event.messageID);
+  const query = args.join(" ");
+  if (!query) {
+    return api.sendMessage(`「 🎥 𝗩𝗶𝗱𝗲𝗼 𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱𝗲𝗿 🎥 」
+
+Please enter a video title to search...
+Example: ${global.config.PREFIX}video kahani suno`, event.threadID);
+  }
+
+  try {
+    api.sendMessage(`🔍 Searching for "${query}"...`, event.threadID);
+
+    // First API for searching
+    const searchUrl = `https://koja-api.web-server.xyz/youtube-search?query=${encodeURIComponent(query)}`;
+    const searchResponse = await axios.get(searchUrl);
+
+    if (!searchResponse.data.success || !searchResponse.data.result.video.length) {
+      return api.sendMessage("No video results found for your search.", event.threadID);
     }
 
-    const contentName = args.join(" ");
-    const processingMessage = await api.sendMessage(
-      "╭═══🅥🅘🅓🅔🅞═══❤╮\n⏤͟͟͞͞◯⬳  😘😘 ᴵᵀˢ ᴹᴱ ˢᴴᴼᴺᴬ ᯤᯱᯱᯱᯱᯱᯱᯱ ᯤᯱᯱᯱ\n   ᶜᴿᴱᴬᵀᴱᴰ ᵇʸ  𓆩♥︎🅐ᴍɪʀ😍𓆪\n🅢ᴇᴀʀᴄʜɪɴɢ ᴠɪᴅᴇᴏ...\n╰❤═════════════╯",
-      event.threadID,
-      null,
-      event.messageID
-    );
+    const videos = searchResponse.data.result.video;
+    const firstVideo = videos[0];
+    const videoUrl = firstVideo.url;
 
-    try {
-      const searchResults = await ytSearch(contentName);
-      if (!searchResults || !searchResults.videos.length) {
-        throw new Error("No results found for your search query.");
-      }
+    api.sendMessage(`🎬 Found Video:
+📌 Title: ${firstVideo.title}
+👤 Artist: ${firstVideo.authorName}
+⏱ Duration: ${firstVideo.duration}
 
-      const topResult = searchResults.videos[0];
-      const videoId = topResult.videoId;
+⬇️ Downloading video...`, event.threadID);
 
-      const apiKey = "priyansh-here";
-      const apiUrl = `https://priyansh-ai.onrender.com/youtube?id=${videoId}&type=video&apikey=${apiKey}`;
+    // Video download API
+    const downloadUrl = `https://koja-api.web-server.xyz/ytmp4?url=${encodeURIComponent(videoUrl)}`;
+    const downloadResponse = await axios.get(downloadUrl, { responseType: 'json' });
 
-      api.setMessageReaction("⌛", event.messageID, () => {}, true);
-
-      const downloadResponse = await axios.get(apiUrl);
-      const downloadUrl = downloadResponse.data.downloadUrl;
-
-      const safeTitle = topResult.title.replace(/[^a-zA-Z0-9 \-_]/g, "");
-      const filename = `${safeTitle}.mp4`;
-      const downloadPath = path.join(__dirname, "cache", filename);
-
-      if (!fs.existsSync(path.dirname(downloadPath))) {
-        fs.mkdirSync(path.dirname(downloadPath), { recursive: true });
-      }
-
-      const response = await axios({
-        url: downloadUrl,
-        method: "GET",
-        responseType: "stream",
-      });
-
-      const fileStream = fs.createWriteStream(downloadPath);
-      response.data.pipe(fileStream);
-
-      await new Promise((resolve, reject) => {
-        fileStream.on("finish", resolve);
-        fileStream.on("error", reject);
-      });
-
-      api.setMessageReaction("✅", event.messageID, () => {}, true);
-
-      await api.sendMessage(
-        {
-          attachment: fs.createReadStream(downloadPath),
-          body: `╭═══🅥🅘🅓🅔🅞═══❤╮\n⏤͟͟͞͞◯⬳  😘😘 ᴵᵀˢ ᴹᴱ ˢᴴᴼᴺᴬ ᯤᯱᯱᯱᯱᯱᯱᯱ ᯤᯱᯱᯱ\n   ᶜᴿᴱᴬᵀᴱᴰ ᵇʸ  𓆩♥︎🅐ᴍɪʀ😍𓆪\nʜᴇʀᴇ ɪs ʏᴏᴜʀ ᴠɪᴅᴇᴏ ᴇɴᴊᴏʏ\n╰❤═════════════╯`,
-        },
-        event.threadID,
-        () => {
-          fs.unlinkSync(downloadPath);
-          api.unsendMessage(processingMessage.messageID);
-        },
-        event.messageID
-      );
-    } catch (error) {
-      console.error(`Failed to download video: ${error.message}`);
-      api.sendMessage(
-        `❌ Failed to download video: ${error.message}`,
-        event.threadID,
-        event.messageID
-      );
-      api.unsendMessage(processingMessage.messageID);
+    if (!downloadResponse.data.success || !downloadResponse.data.download?.url) {
+      return api.sendMessage("Error: Could not get video download link.", event.threadID);
     }
-  },
+
+    const videoDownloadUrl = downloadResponse.data.download.url;
+    const fileName = `${event.senderID}.mp4`;
+    const filePath = __dirname + `/cache/${fileName}`;
+
+    // Download the video file
+    const videoResponse = await axios({
+      method: 'get',
+      url: videoDownloadUrl,
+      responseType: 'stream'
+    });
+
+    const writer = fs.createWriteStream(filePath);
+    videoResponse.data.pipe(writer);
+
+    return new Promise((resolve, reject) => {
+      writer.on('finish', () => {
+        const message = {
+          body: `✅ Video Downloaded Successfully!
+📛 Title: ${firstVideo.title}
+🎤 Artist: ${firstVideo.authorName}
+⌚ Duration: ${firstVideo.duration}
+
+Credits: 𒄬• 𝐅𝐚𝐫𝐞𝐁𝐢𝐢𝐰 ː͢» ⸙`,
+          attachment: fs.createReadStream(filePath)
+        };
+
+        api.sendMessage(message, event.threadID, () => {
+          fs.unlinkSync(filePath);
+          resolve();
+        });
+      });
+
+      writer.on('error', (error) => {
+        console.error('[VIDEO DOWNLOAD ERROR]', error);
+        api.sendMessage('Failed to download the video file.', event.threadID);
+        reject(error);
+      });
+    });
+
+  } catch (error) {
+    console.error('[ERROR]', error);
+    api.sendMessage('An error occurred while processing your video request: ' + error.message, event.threadID);
+  }
 };
