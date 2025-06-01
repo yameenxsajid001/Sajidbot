@@ -1,10 +1,10 @@
 module.exports.config = {
 	name: "pending",
 	version: "1.0.5",
-	credits: "aziz",
-	hasPermssion: 1,
-	description: "Manage bot's waiting messages",
-	commandCategory: "system",
+	credits: "Mirai Team",
+	hasPermssion: 2,
+	description: "",
+	commandCategory: "admin",
 	cooldowns: 5
 };
 
@@ -22,12 +22,12 @@ module.exports.languages = {
     "en": {
         "invaildNumber": "%1 is not an invalid number",
         "cancelSuccess": "Refused %1 thread!",
-        "notiBox": "ㅤ╭𓆩͡sʜᴏɴᴀ͜巛😍ᯤᯱᯱᯱᯱᯱᯱᯱ ᯤᯱᯱᯱ࿐ ╮\n   ╰─────────────╯\n         🫡🫡🫡🫡🫡🫡\n    I  Jump Successfully😁\n         Owner 𓆩ᴀᴍɪʀ💖𓆪\n╰───────────────╯",
+        "notiBox": " 𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗲𝗱 𝗦𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆!\n𝗧𝗵𝗮𝗻𝗸 𝗬𝗼𝘂 𝗙𝗼𝗿 𝗖𝗵𝗼𝗼𝘀𝗶𝗻𝗴\n𝗕𝗼𝗧, 𝗛𝗮𝘃𝗲 𝗙𝘂𝗻 𝗨𝘀𝗶𝗻𝗴 𝗶𝘁 (ღ˘⌣˘ღ) \n☆𝗕𝗼𝗧 𝗢𝘄𝗻𝗲𝗿☆ \n⏤͟͟͞͞★͙≛͙⃝͙𝐉𝐎𝐑𝐃𝐀𝐍 =—⚉➛ 🖤💜",
         "approveSuccess": "Approved successfully %1 threads!",
 
         "cantGetPendingList": "Can't get the pending list!",
-        "returnListPending": "╭─𓆩sʜᴏɴᴀ͜͡巛😍ᯤᯱᯱᯱᯱᯱᯱᯱ ᯤᯱᯱᯱ࿐ ─╮\n➢PENDING LIST\n➥: %1\n➥Name %2\n╰───────────────╯",
-        "returnListClean": "╭─𓆩sʜᴏɴᴀ͜巛😍ᯤᯱᯱᯱᯱᯱᯱᯱ ᯤᯱᯱᯱ࿐ ─╮\n➢PENDING List\n➥NOTHINGS IS AVAILABLE\n╰───────────────╯"
+        "returnListPending": "»「PENDING」«❮ The whole number of threads to approve is: %1 thread ❯\n\n%2",
+        "returnListClean": "「PENDING」There is no thread in the pending list"
     }
 }
 
