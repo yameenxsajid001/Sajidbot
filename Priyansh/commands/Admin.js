@@ -140,6 +140,6 @@ module.exports.run = async function ({ api, event, args, Users, permssion, getTe
 
         default: {
             return global.utils.throwError(this.config.name, threadID, messageID);
-        }
+         }
     };
 }
