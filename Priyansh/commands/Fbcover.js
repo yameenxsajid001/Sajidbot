@@ -1,5 +1,5 @@
 module.exports.config = {
-  name: "fbcoverv3",
+  name: "couple",
   version: "1.0.0",
   hasPermssion: 0,
   credits: "ATF-TEAM",
@@ -106,4 +106,4 @@ if(!fs.existsSync(__dirname+'/tad/SVN-Holidays.ttf')) {
   fs.writeFileSync(path, imageBuffer);
 return api.sendMessage({ attachment: fs.createReadStream(path)}, threadID, () => fs.unlinkSync(path), messageID);   
   }
-                                                                                   }
+                                                                                  }
