@@ -41,7 +41,7 @@ var msg = [`ljkj`];
         }
         case "reply": {
             let name = await Users.getNameUser(event.senderID);
-            api.sendMessage({body: `===== 𝗨𝗦𝗘𝗥 𝗙𝗘𝗘𝗗𝗕𝗔𝗖𝗞 =====\n━━━━━━━━━━━━━━━━━━\n\nMessage: ${body}\nNaMe : ${name || "Facebook User"}\nGroup NaMe: ${(await Threads.getInfo(threadID)).threadName || "Unknow"}\nTiMe and DaTe: ${moment().tz("Asia/Manila").format("DD/MM/YYYY-HH:mm:ss")}\n\nReply T0o This Message T0o Continue The Conversation.`, attachment: await downLoad(`https://graph.facebook.com/${event.senderID}/picture?height=720&width=720&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`, __dirname+'/cache/12345.jpg')},handleReply.threadID, (err, info) => {
+            api.sendMessage({body: `===== 𝗨𝗦𝗘𝗥 𝗙𝗘𝗘𝗗𝗕𝗔𝗖𝗞 =====\n━━━━━━━━━━━━━━━━━━\n\nMessage: ${body}\nNaMe : ${name || "Facebook User"}\nGroup NaMe: ${(await Threads.getInfo(threadID)).threadName || "Unknow"}\nTiMe and DaTe: ${moment().tz("Asia/Karachi").format("DD/MM/YYYY-HH:mm:ss")}\n\nReply T0o This Message T0o Continue The Conversation.`, attachment: await downLoad(`https://graph.facebook.com/${event.senderID}/picture?height=720&width=720&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`, __dirname+'/cache/12345.jpg')},handleReply.threadID, (err, info) => {
                 if(err) console.log(err)
                 else {
                     global.client.handleReply.push({
