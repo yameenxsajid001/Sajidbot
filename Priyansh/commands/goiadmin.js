@@ -2,9 +2,9 @@ module.exports.config = {
   name: "goiadmin",
   version: "1.0.0",
   hasPermssion: 0,
-  credits: "John Arida",
-  description: "Bot will rep ng tag admin or rep ng tagbot ",
-  commandCategory: "Other",
+  credits: "JORDAN",
+  description: "",
+  commandCategory: "",
   usages: "",
   cooldowns: 1
 };
@@ -13,8 +13,8 @@ module.exports.handleEvent = function({ api, event }) {
     var aid = ["100012191281263"];
     for (const id of aid) {
     if ( Object.keys(event.mentions) == id) {
-      var msg = ["Don't tag admin, he's busy 😗", "Admin is currently unavailable 🤧", "Sorry, admin is offline 😪","Do you like my admin thats why your tagging him? 😏"," My Admin is asleep, don't tag him, wake him up and reply 🥱"];
-      api.setMessageReaction("😍", event.messageID, (err) => {}, true);
+      var msg = ["𝗔𝘄𝘄 𝗨𝗵 𝗠𝗲𝗻𝗧𝗶𝗼𝗻 𝗠𝘆 𝗢𝘄𝗻𝗲𝗿 🙈"];
+      api.setMessageReaction("🙈", event.messageID, (err) => {}, true);
       return api.sendMessage({body: msg[Math.floor(Math.random()*msg.length)]}, event.threadID, event.messageID);
     }
     }}
