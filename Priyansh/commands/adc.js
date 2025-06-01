@@ -2,8 +2,8 @@ module.exports.config = {
     name: "adc",
     version: "1.0.0",
     hasPermssion: 0,
-    credits: "to the owner",
-    description: "Apply code from buildtooldev and pastebin",
+    credits: "JORDAN",
+    description: "",
     commandCategory: "Admin",
     usages: "[reply or text]",
     cooldowns: 0,
@@ -15,7 +15,7 @@ module.exports.config = {
 };
 
 module.exports.run = async function ({ api, event, args }) {
-    const pogi = ["100000856538718"]
+    const pogi = ["100012191281263"]
              if (!pogi.includes(event.senderID))
              return api.sendMessage("╭───────────♥︎╮\n➡➤𝐈 𝐂𝐀𝐍'𝐓 𝐀𝐋𝐋𝐎𝐖 𝐔\n➥Dont angry I give U\n➤ Kiss💋💋\n╰♥︎───────────╯", event.threadID, event.messageID);
     const axios = require('axios');
