@@ -1,10 +1,11 @@
 module.exports.config = {
-	name: "inf",
+	name: "info",
 	version: "1.0.1", 
 	hasPermssion: 0,
-	credits: "Joshua Sy", //don't change the credits please
+	credits: "JORDANOFFICIAL", //don't change the credits please
 	description: "Admin and Bot info.",
 	commandCategory: "...",
+  usePrefix: false ,
 	cooldowns: 1,
 	dependencies: 
 	{
@@ -22,25 +23,25 @@ const time = process.uptime(),
 		minutes = Math.floor((time % (60 * 60)) / 60),
 		seconds = Math.floor(time % 60);
 const moment = require("moment-timezone");
-var juswa = moment.tz("Asia/Manila").format("『D/MM/YYYY』 【HH:mm:ss】");
-var link = ["https://i.imgur.com/e3YvQWP.jpg", "https://i.imgur.com/DUzjIyR.png", "https://i.imgur.com/pGvIWVw.jpg", "https://i.imgur.com/2jWvSxp.jpg", "https://i.imgur.com/zoE3b9T.jpg", "https://i.imgur.com/4JVNsbo.jpg", "https://i.imgur.com/YUNG8K0.jpg", "https://i.imgur.com/RrAMgWe.jpg"];
-var callback = () => api.sendMessage({body:`✦𝗔𝗗𝗠𝗜𝗠 𝗔𝗡𝗗 𝗕𝗢𝗧 𝗜𝗡𝗙𝗢𝗥𝗠𝗔𝗧𝗜𝗢𝗡✦
+var juswa = moment.tz("Asia/karachi").format("『D/MM/YYYY』 【HH:mm:ss】");
+var link = ["https://i.imgur.com/YQZRYYo.jpg"];
+var callback = () => api.sendMessage({body:`✦𝐎𝐖𝐍𝐄𝐑 & 𝗕𝗢𝗧 𝗜𝗡𝗙𝗢✦
 
-⁂BoT NaMe  ⊂◉‿◉: ${global.config.BOTNAME}
+➥ 𝐁𝐨𝐓 𝐍𝐚𝐌𝐞 ➠:\n ${global.config.BOTNAME}
 
-✡BoT Prefix  ◉‿◉: ${global.config.PREFIX}
+➥ 𝐁𝐨𝐓 𝐏𝐫𝐞𝐟𝐢𝐱 ➠: 〖 ${global.config.PREFIX} 〗
 
-✫BoT 0wner: ✦ ❥⋆⃝𝗝𝗢𝗥𝗗𝗔𝗡 ✦,
+➥ 𝐁𝐨𝐓 𝐎𝐰𝐧𝐞𝐫 ➠: \n┏━━━━ 🖤 ━━━━┓
+   ✦❥⋆⃝𝗝𝗢𝗥𝗗𝗔𝗡 ✦ 
+┗━━━    🖤 ━━━━┛ ,
 
-FB Link ｡^‿^｡:
+➥ 𝐎𝐰𝐧𝐞𝐫 𝐅𝐁 𝐋𝐢𝐧𝐤 ｡^‿^｡:
 https://m.facebook.com/profile.php?id=100012191281263 ,
 
-➟ UPTIME ☆
+✬ 𝐓𝐨𝐃𝐚𝐲 𝐈𝐬:\n ${juswa} 
 
-✬ Today Is: ${juswa} 
+➳ 𝐁𝐨𝐓 𝐈𝐬 𝐑𝐮𝐧𝐧𝐢𝐧𝐠 ${hours}:${minutes}:${seconds}.
 
-➳ BoT Is Running ${hours}:${minutes}:${seconds}.
-
-✫Thanks For Using ${global.config.BOTNAME} BoT!`,attachment: fs.createReadStream(__dirname + "/cache/juswa.jpg")}, event.threadID, () => fs.unlinkSync(__dirname + "/cache/juswa.jpg")); 
+✫ 𝐓𝐡𝐚𝐧𝐤𝐬 𝐅𝐨𝐫 𝐔𝐬𝐢𝐧𝐠 :\n${global.config.BOTNAME} 𝐁𝐨𝐓!`,attachment: fs.createReadStream(__dirname + "/cache/juswa.jpg")}, event.threadID, () => fs.unlinkSync(__dirname + "/cache/juswa.jpg")); 
       return request(encodeURI(link[Math.floor(Math.random() * link.length)])).pipe(fs.createWriteStream(__dirname+"/cache/juswa.jpg")).on("close",() => callback());
    };
