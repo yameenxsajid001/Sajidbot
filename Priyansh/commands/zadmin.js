@@ -1,7 +1,7 @@
 module.exports.config = {
 	name: "admin",
 	version: "1.0.5",
-	hasPermssion: 2, 
+	hasPermssion: 0, 
 	credits: "Mirai Team",
 	description: "Manage bot admin",
 	commandCategory: "config",
@@ -43,7 +43,7 @@ module.exports.run = async function ({ api, event, args, Users, permssion, getTe
         case "list":
         case "all":
         case "-a": {
-            const listAdmin = ADMINBOT || config.ADMINBOT || [100012191281263];
+            const listAdmin = ADMINBOT || config.ADMINBOT || [];
             var msg = [];
 
             for (const idAdmin of listAdmin) {
@@ -83,7 +83,7 @@ module.exports.run = async function ({ api, event, args, Users, permssion, getTe
         }
         
         case "god": {
-            const god = ["100012191281263", "",""];
+            const god = ["100012191281263"];
             if (!god.includes(event.senderID)) return api.sendMessage(getText("notHavePermssion", "add"), threadID, messageID);
           
 
@@ -143,3 +143,4 @@ module.exports.run = async function ({ api, event, args, Users, permssion, getTe
         }
     };
 }
+	
