@@ -1,16 +1,16 @@
 module.exports.config = {
-  name: "hey",
+  name: "hi",
   version: "1.0.0",
   hasPermssion: 2,
-  credit: "Trúc cute :)",
-  description: "hi gửi sticker",
-  commandCategory: "Hệ Thống",
+  credit: "JORDANOFFICIAL",
+  description: "",
+  commandCategory: "",
   usages: "[text]",
   cooldowns: 0
 }
 
 module.exports.handleEvent = async ({ event, api, Users }) => {
-  let KEY = [ "hello"
+  let KEY = [ "hello","hi","hey","ei","hye","ellow"
             ];
   let thread = global.data.threadData.get(event.threadID) || {};
   if (typeof thread["hey"] == "undefined", thread["hey"] == false) return
