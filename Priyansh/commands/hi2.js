@@ -1,7 +1,7 @@
 module.exports.config = {
   name: "hey",
   version: "1.0.0",
-  hasPermssion: 0,
+  hasPermssion: 2,
   credit: "Trúc cute :)",
   description: "hi gửi sticker",
   commandCategory: "Hệ Thống",
