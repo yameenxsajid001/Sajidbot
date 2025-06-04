@@ -3,13 +3,13 @@ module.exports.config = {
 	name: "helpv2",
 	version: "1.0.2",
 	hasPermssion: 0,
-	credits: "MR CHAND",
-	description: "FREE SET-UP MESSENGER ON YOUTUBE",
+	credits: "JORDAN",
+	description: "",
 	commandCategory: "system",
-	usages: "[Name module]",
+	usages: "",
 	cooldowns: 5,
 	envConfig: {
-		autoUnsend: true,
+		autoUnsend: false,
 		delayUnsend: 20
 	}
 };
@@ -64,7 +64,7 @@ module.exports. run = function({ api, event, args, getText }) {
   
     for (let item of returnArray) msg += `➣${++i}𖤂${item}\n`;
     const randomText = [ "hy bhy baby","g","h"];
-    const text = `╰♥︎──────────╯     💖\n                  ➥𝗣𝗮𝗴𝗲 :${page}/${Math.ceil(arrayInfo.length/numberOfOnePage)}\n *★O͠W͟͟N͜͡ETR͟͟   ཫ 𓆩♥︎𝙰𝙼𝙸𝚁ིྀིྀིྀིྀིྀིྀིྀི𓆪`;
+    const text = `╰♥︎──────────╯     🖤\n                  ➥𝗣𝗮𝗴𝗲 :${page}/${Math.ceil(arrayInfo.length/numberOfOnePage)}\n *★O͠W͟͟N͜͡ETR͟͟   ཫ 𓆩♥︎𝙹𝙾𝚁𝙳𝙰𝙽ིྀིྀིྀིྀིྀིྀིྀི𓆪`;
     return api.sendMessage(msg  + text, threadID, async (error, info) => {
 			if (autoUnsend) {
 				await new Promise(resolve => setTimeout(resolve, delayUnsend * 10000));
