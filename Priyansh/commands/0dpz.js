@@ -1,11 +1,11 @@
 module.exports.config = {
-  name: "Pinterest",
+  name: "dpz",
   version: "0.0.1",
   hasPermssion: 0,
   credits: "Amir",
-  description: "Pinterest search",
+  description: "Dps search",
   commandCategory: "tools",
-  usages: "pin text - number",
+  usages: "text - number",
   cooldowns: 0
 };
 module.exports.run = async function({ api, event, args }) {
