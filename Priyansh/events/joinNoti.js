@@ -13,9 +13,7 @@ const request = require("request");
         const { threadID } = event;
         if (event.logMessageData.addedParticipants.some(i => i.userFbId == api.getCurrentUserID())) {
                 api.changeNickname(`》 ${global.config.PREFIX} 《 ❃ ➠ ${(!global.config.BOTNAME) ? " " : global.config.BOTNAME}`, threadID, api.getCurrentUserID());
-                return api.sendMessage(`≪══════◄••❀••►══════≫\n\n𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗲𝗱 𝗦𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆!
-𝗧𝗵𝗮𝗻𝗸 𝗬𝗼𝘂 𝗙𝗼𝗿 𝗖𝗵𝗼𝗼𝘀𝗶𝗻𝗴\n\n ┏━━━━ 🖤 ━━━━┓\n   ${global.config.BOTNAME}\n ┗━━━    🖤 ━━━━┛ \n\n𝗕𝗼𝗧, 𝗛𝗮𝘃𝗲 𝗙𝘂𝗻 𝗨𝘀𝗶𝗻𝗴 𝗶𝘁 ❀\n\n☆𝗕𝗼𝗧 𝗢𝘄𝗻𝗲𝗿☆ \n\n╔════•|🖤|•════╗           ✦❥⋆⃝𝗝𝗢𝗥𝗗𝗔𝗡 ✦\n╚════•|🖤|•════╝
-\n\n≪══════◄••❀••►══════≫`, threadID, (e, info) => {
+                return api.sendMessage(`𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗲𝗱 𝗦𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆!`, threadID, (e, info) => {
       setTimeout(() => {
         api.sendMessage({sticker: 958510944241784}, event.threadID);
       }, 100)
