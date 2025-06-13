@@ -1,30 +1,74 @@
 module.exports.config = {
-  name: `gemini`,
-  version: "1.1.0",
-  permission: 0,
-  credits: "ryuko",
-  description: "",
-  prefix: false,
-  premium: false,
-  category: "without prefix",
-  usage: ``,
-  cooldowns: 3,
-  dependency: {
-    "axios": ""
-  }
+    name: "pairlove",
+    version: "3.1.1",
+    hasPermssion: 0,
+    credits: "Mr Amir",
+    description: "Pairing",
+    commandCategory: "fun",
+    usages: "[@tag]",
+    cooldowns: 5,
+    dependencies: {
+        "axios": "",
+        "fs-extra": "",
+        "path": "",
+        "jimp": ""
+    }
 };
-const axios = require('axios');
-module.exports.run = async function ({api, event, args}) {
-    const ask = args.join(" ");
+
+module.exports.onLoad = async() => {
+    const { resolve } = global.nodemodule["path"];
+    const { existsSync, mkdirSync } = global.nodemodule["fs-extra"];
+    const { downloadFile } = global.utils;
+    const dirMaterial = __dirname + `/cache/canvas/`;
+    const path = resolve(__dirname, 'cache/canvas', 'pairlove.jpeg');
+    if (!existsSync(dirMaterial + "canvas")) mkdirSync(dirMaterial, { recursive: true });
+    if (!existsSync(path)) await downloadFile("https://i.imgur.com/OUKnbB6.jpeg", path);
+}
+
+async function makeImage({ one, two }) {
+    const fs = global.nodemodule["fs-extra"];
+    const path = global.nodemodule["path"];
+    const axios = global.nodemodule["axios"]; 
+    const jimp = global.nodemodule["jimp"];
+    const __root = path.resolve(__dirname, "cache", "canvas");
+
+    let batgiam_img = await jimp.read(__root + "/pairlove.jpeg");
+    let pathImg = __root + `/batman${one}_${two}.png`;
+    let avatarOne = __root + `/avt_${one}.png`;
+    let avatarTwo = __root + `/avt_${two}.png`;
     
-    if (!ask) {
-        return api.sendMessage(`please provide a message`, event.threadID, event.messageID);
+    let getAvatarOne = (await axios.get(`https://graph.facebook.com/${one}/picture?width=512&height=512&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`, { responseType: 'arraybuffer' })).data;
+    fs.writeFileSync(avatarOne, Buffer.from(getAvatarOne, 'utf-8'));
+    
+    let getAvatarTwo = (await axios.get(`https://graph.facebook.com/${two}/picture?width=512&height=512&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`, { responseType: 'arraybuffer' })).data;
+    fs.writeFileSync(avatarTwo, Buffer.from(getAvatarTwo, 'utf-8'));
+    
+    let circleOne = await jimp.read(await circle(avatarOne));
+    let circleTwo = await jimp.read(await circle(avatarTwo));
+    batgiam_img.composite(circleOne.resize(200, 200), 72, 107).composite(circleTwo.resize(199, 200), 465, 105);
+    
+    let raw = await batgiam_img.getBufferAsync("image/png");
+    
+    fs.writeFileSync(pathImg, raw);
+    fs.unlinkSync(avatarOne);
+    fs.unlinkSync(avatarTwo);
+    
+    return pathImg;
+}
+async function circle(image) {
+    const jimp = require("jimp");
+    image = await jimp.read(image);
+    image.circle();
+    return await image.getBufferAsync("image/png");
+}
+
+module.exports.run = async function ({ event, api, args }) {    
+    const fs = global.nodemodule["fs-extra"];
+    const { threadID, messageID, senderID } = event;
+    const mention = Object.keys(event.mentions);
+    if (!mention[0]) return api.sendMessage("Please mention 1 person.", threadID, messageID);
+    else {
+        const one = senderID, two = mention[0];
+        return makeImage({ one, two }).then(path => api.sendMessage({ body: "≪══════◄••❀••►══════≫\n\n‎  🅢𝐔𝐂𝐂𝐄𝐒𝐒𝐅𝐔𝐋  🅟𝐀𝐈𝐑𝐈𝐍𝐆\n\n≪══════◄••❀••►══════≫", attachment: fs.createReadStream(path) }, threadID, () => fs.unlinkSync(path), messageID));
     }
-    try {
-        const res = await axios.get(`https://kaiz-apis.gleeze.com/api/gemini-pro?q=${ask}&uid=${event.senderID}`);
-        const message = res.data.response;
-        return api.sendMessage(message, event.threadID, event.messageID);
-    } catch (err) {
-        return api.sendMessage(`can't fetch api key.`, event.threadID, event.messageID);
-    }
-                                    }
+      }
