@@ -89,7 +89,7 @@ module.exports.run = async ({ api, event }) => {
 𝗔𝗿𝘁𝗶𝘀𝘁: ${firstVideo.authorName}
 𝗗𝘂𝗿𝗮𝘁𝗶𝗼𝗻: ${firstVideo.duration}
 
-𝗖𝗿𝗲𝗱𝗶𝘁𝘀: 𒄬• 𝐅𝐚𝐫𝐞𝐁𝐢𝐢𝐰 ː͢» ⸙`,
+𝗖𝗿𝗲𝗱𝗶𝘁𝘀: 𒄬• Sajid`,
           attachment: fs.createReadStream(filePath)
         };
 
