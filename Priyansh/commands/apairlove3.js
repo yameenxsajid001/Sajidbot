@@ -4,7 +4,7 @@
 */
 
 module.exports.config = {
-    name: "plovev3",
+    name: "plovev2",
     version: "2.0.0",
     hasPermssion: 0,
     credits: "Nayan",
