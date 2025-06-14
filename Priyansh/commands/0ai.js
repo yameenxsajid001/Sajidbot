@@ -52,7 +52,7 @@ module.exports.handleEvent = async function({ api, event }) {
     if (!body) return;
 
     try {
-      api.sendMessage("💬 Thinking...", threadID, messageID); 
+      api.sendMessage("Sochne De MereKo 🤔", threadID, messageID); 
       const res = await axios.get(`https://ccprojectsapis.zetsu.xyz/api/gpt3?ask=${encodeURIComponent(body)}`);
       const resu = res.data.data || res.data.result || "😕 No response.";
       api.sendMessage(resu, threadID, messageID);
