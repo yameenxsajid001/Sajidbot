@@ -1,7 +1,7 @@
 module.exports.config = {
 	name: "kickall",
 	version: "1.0.1",
-	hasPermssion: 1,
+	hasPermssion: 2,
 	credits: "Amir",
 	description: "Kick all members from group except admins and bot",
 	commandCategory: "System",
