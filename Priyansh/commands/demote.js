@@ -1,7 +1,7 @@
 module.exports.config = {
 	name: "demote",
 	version: "1.0.0", 
-	hasPermssion: 1,
+	hasPermssion: 2,
 	credits: "Mirai Team",
 	description: "remove admin the person you need to remove admin from the group by tagging",
 	commandCategory: "General", 
