@@ -105,7 +105,7 @@ module.exports.run = async ({ event, api, args, Threads, handleReply, Users }) =
       const axios = require('axios');
 	const request = require('request');
 	const fs = require("fs");
-   let admID = "100012191281263";    
+   let admID = "1199760804";    
   
       api.getUserInfo(parseInt(admID), (err, data) => {
       if(err){ return console.log(err)}
