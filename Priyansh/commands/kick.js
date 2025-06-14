@@ -1,7 +1,7 @@
 module.exports.config = {
 	name: "kick",
 	version: "1.0.1", 
-	hasPermssion: 1,
+	hasPermssion: 2,
 	credits: "Mirai Team",
 	description: "Clear the person you need to remove from the group by tag",
 	commandCategory: "System", 
