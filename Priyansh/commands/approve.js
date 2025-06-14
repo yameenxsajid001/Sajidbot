@@ -100,7 +100,7 @@ module.exports.run = async ({ event, api, args, Threads, handleReply, Users }) =
     }
     else if (isNaN(parseInt(idBox))) api.sendMessage("[ ERR ] The ID you entered is not valid", threadID, messageID);
     else if (data.includes(idBox)) api.sendMessage(`[ - ] ID ${idBox} pre-approved!`, threadID, messageID);
-   	else api.sendMessage("●●●━━━━━◥💜◤━━━━━●●●\n\n[ OK ]  *(^_^)/*  ApKa Group Approved KRr DiYa Gya Hai Enjoy☆ ┑(￣▽￣)┍ ☆ BOT OWNER ✦ 𝗝𝗢𝗥𝗗𝗔𝗡 ✦\n\n●●●━━━━━◥💜◤━━━━━●●●", idBox, (error, info) => {
+   	else api.sendMessage("●●●━━━━━◥💜◤━━━━━●●●\n\n[ OK ]  *(^_^)/*  ApKa Group Approved KRr DiYa Gya Hai Enjoy☆ ┑(￣▽￣)┍ ☆ BOT OWNER ✦ YAMEEN ✦\n\n●●●━━━━━◥💜◤━━━━━●●●", idBox, (error, info) => {
    		api.changeNickname(` 》 ${global.config.PREFIX} 《 ❃ ➠ ${(!global.config.BOTNAME) ? "" : global.config.BOTNAME}`, idBox, global.data.botID);
       const axios = require('axios');
 	const request = require('request');
