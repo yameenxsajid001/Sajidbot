@@ -19,6 +19,6 @@ module.exports.run = async({ api, event, Threads, global }) => {
    var mention = Object.keys(event.mentions);
      let tag = event.mentions[mention].replace("@", "");
     if (!mention) return api.sendMessage("Tish She KRrNi Fyt Tag Kro 💉", threadID, messageID);
-   var callback = () => api.sendMessage({body:`🤜${tag}` +🤛 `👊😘🙈🙈😘👊 \n\n☆ 𝗖𝗿𝗲𝗱𝗶𝘁'𝘀 ☆ ✦❥⋆⃝𝗝𝗢𝗥𝗗𝗔𝗡 ✦ `,mentions: [{tag: tag,id: Object.keys(event.mentions)[0]}],attachment: fs.createReadStream(__dirname + "/cache/spair.gif")}, event.threadID, () => fs.unlinkSync(__dirname + "/cache/spair.gif"));  
+   var callback = () => api.sendMessage({body:`🤜${tag}` +🤛 `👊😘🙈🙈😘👊 \n\n☆ 𝗖𝗿𝗲𝗱𝗶𝘁'𝘀 ☆ ✦❥⋆⃝YAMEEN ✦ `,mentions: [{tag: tag,id: Object.keys(event.mentions)[0]}],attachment: fs.createReadStream(__dirname + "/cache/spair.gif")}, event.threadID, () => fs.unlinkSync(__dirname + "/cache/spair.gif"));  
       return request(encodeURI(link[Math.floor(Math.random() * link.length)])).pipe(fs.createWriteStream(__dirname+"/cache/spair.gif")).on("close",() => callback());
 }
