@@ -1,59 +1,64 @@
+const axios = require('axios');
+const aiStatus = {}; // To track AI On/Off per thread
+
 module.exports.config = { 
   name: 'ai', 
   version: '1.1.1', 
   hasPermssion: 0, 
-  credits: 'JORDAN', 
-  description: 'ChatGPT', 
-  commandCategory: '....', 
-  usages: 'Ai [question]', 
+  credits: 'AMIR', 
+  description: 'ChatGPT with AI On/Off toggle', 
+  commandCategory: 'AI', 
+  usages: 'Ai [question/on/off]', 
   cooldowns: 0, 
 }; 
 
 module.exports.run = async function({ api, event, args }) {
-  const b = require('axios'); 
-  let txt = args.join(" "); 
-  
-  if (!txt) { 
-    return api.sendMessage("✦ HanJi ✦..", event.threadID, event.messageID);
-  } 
-  
-  try {
-    api.sendMessage(`Sochny De MereKo...`, event.threadID, event.messageID); 
-    const res = await b.get(`https://ccprojectsapis.zetsu.xyz/api/gpt3?ask=${encodeURIComponent(txt)}`); 
-    
-    // Handle the response format where data comes in res.data.data
-    let resu = res.data.data || res.data.result || "Abhi Mera M0oD Nhi Hai 😒";
-    api.sendMessage(resu, event.threadID, event.messageID);
-  } catch (error) {
-    console.error(error);
-    api.sendMessage("An error occurred while processing your request.", event.threadID, event.messageID);
+  const { threadID, messageID } = event;
+  const input = args.join(" ").toLowerCase();
+
+  // Toggle ON
+  if (input === "on") {
+    aiStatus[threadID] = true;
+    return api.sendMessage("✅ AI Auto-Reply is now ON. Reply to my messages to chat with me.", threadID, messageID);
   }
-}
+
+  // Toggle OFF
+  if (input === "off") {
+    aiStatus[threadID] = false;
+    return api.sendMessage("❌ AI Auto-Reply is now OFF.", threadID, messageID);
+  }
+
+  // Normal AI usage via command
+  if (!input) {
+    return api.sendMessage("✦ HanJi ✦..", threadID, messageID);
+  }
+
+  try {
+    api.sendMessage("Sochny De MereKo...", threadID, messageID); 
+    const res = await axios.get(`https://ccprojectsapis.zetsu.xyz/api/gpt3?ask=${encodeURIComponent(input)}`); 
+    const resu = res.data.data || res.data.result || "Abhi Mera M0oD Nhi Hai 😒";
+    api.sendMessage(resu, threadID, messageID);
+  } catch (err) {
+    console.error(err);
+    api.sendMessage("⚠️ Error: Couldn't process your request.", threadID, messageID);
+  }
+};
 
 module.exports.handleEvent = async function({ api, event }) {
-  const b = require("axios");
-  
-  if (event.body && event.body.startsWith("Ai")) { 
-    let text = event.body; 
-    let chat = text.split(" "); 
-    
-    if (chat.length < 2) {
-      api.sendMessage("✦ HanJi ✦..", event.threadID, event.messageID);
-    } else {
-      chat.shift();
-      let question = chat.join(" ");
-      
-      try {
-        api.sendMessage(`Typing...`, event.threadID, event.messageID); 
-        const res = await b.get(`https://ccprojectsapis.zetsu.xyz/api/gpt3?ask=${encodeURIComponent(question)}`);
-        
-        // Handle the response format where data comes in res.data.data
-        let resu = res.data.data || res.data.result || "Sorry, I couldn't get a response.";
-        api.sendMessage(resu, event.threadID, event.messageID);
-      } catch (error) {
-        console.error(error);
-        api.sendMessage("An error occurred while processing your request.", event.threadID, event.messageID);
-      }
-    } 
-  } 
-}
+  const { threadID, messageID, messageReply, senderID, body } = event;
+
+  // Only work when AI is enabled and it's a reply to bot
+  if (aiStatus[threadID] && messageReply && messageReply.senderID == api.getCurrentUserID()) {
+    if (!body) return;
+
+    try {
+      api.sendMessage("💬 Thinking...", threadID, messageID); 
+      const res = await axios.get(`https://ccprojectsapis.zetsu.xyz/api/gpt3?ask=${encodeURIComponent(body)}`);
+      const resu = res.data.data || res.data.result || "😕 No response.";
+      api.sendMessage(resu, threadID, messageID);
+    } catch (err) {
+      console.error(err);
+      api.sendMessage("⚠️ Error while replying.", threadID, messageID);
+    }
+  }
+};
