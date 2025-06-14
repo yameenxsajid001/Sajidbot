@@ -1,3 +1,11 @@
+module.exports.config = {
+    name: "groupUpdate",
+    eventType: ["log:thread-admins", "log:thread-name", "log:user-nickname", "log:thread-icon", "change_thread_image", "log:thread-call"],
+    version: "1.0.0",
+    credits: "ATF-TEAM",//inspire by presel
+    description: "GROUP UPDATE NOTIFICATION"
+};
+
 module.exports.handleEvent = async function ({ api, event }) {
   const { threadID, logMessageType, logMessageData, author } = event;
 
