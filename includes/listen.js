@@ -279,7 +279,7 @@ module.exports = function({ api, models }) {
         })
         return api.sendMessage(`Sent a request to the admin bot(s) !`, event.threadID);
       }
-      if (event.body && event.body.startsWith(prefix)) return api.sendMessage(`✦Ye Bot Is Group Main Approved Nahi Hai So Approved Ke LiYe Request Kre_Ase: ${prefix}request\n☆FaceBook Owner Link\n✦ŶÁМĔĔŃ ĶĤÁŃ ✦\nhttps://m.facebook.com/yameen99king\n✦𝐁𝐎𝐓 𝐔𝐍𝐃𝐄𝐑 𝐏𝐑𝐎𝐓𝐄𝐂𝐓𝐄𝐃 𝐁𝐘 𝐎𝐖𝐍𝐄𝐑✦`, event.threadID);
+      if (event.body && event.body.startsWith(prefix)) return api.sendMessage(`✦Ye Bot Is Group Main Approved Nahi Hai:\nUse ${prefix}request\n☆Bot Owner Link \nhttps://m.facebook.com/yameen99king\n\n✦𝐁𝐎𝐓 𝐔𝐍𝐃𝐄𝐑 𝐏𝐑𝐎𝐓𝐄𝐂𝐓𝐄𝐃 𝐁𝐘 𝐎𝐖𝐍𝐄𝐑✦`, event.threadID);
     };
     switch (event.type) {
       case "message":
