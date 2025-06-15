@@ -4,7 +4,7 @@ const axios = require("axios")
 module.exports.config = {
   name: "fight",
   version: "1.0.0",
-  hasPermssion: 0,
+  hasPermssion: 2,
   credits: "Jordanofficial",
   description: "love",
   commandCategory: "love",
