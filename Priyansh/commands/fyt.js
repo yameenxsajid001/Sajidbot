@@ -2,7 +2,7 @@ const request = require("request");
 const fs = require("fs")
 const axios = require("axios")
 module.exports.config = {
-  name: "fyt",
+  name: "fight",
   version: "1.0.0",
   hasPermssion: 0,
   credits: "Jordanofficial",
