@@ -4,7 +4,7 @@ const aiStatus = {}; // To track AI On/Off per thread
 module.exports.config = { 
   name: 'ai', 
   version: '1.1.1', 
-  hasPermssion: 0, 
+  hasPermssion: 2, 
   credits: 'AMIR', 
   description: 'ChatGPT with AI On/Off toggle', 
   commandCategory: 'AI', 
