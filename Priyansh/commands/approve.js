@@ -132,7 +132,7 @@ module.exports.run = async ({ event, api, args, Threads, handleReply, Users }) =
    		else {
    			data.push(idBox);
    			fs.writeFileSync(dataPath, JSON.stringify(data, null, 2));
-   			api.sendMessage(`[ OK ] Successfully Approved The Box (◕‿◕):\n${idBox}`, threadID, () => {
+   			api.sendMessage(`[OK] Successfully Approved`, threadID, () => {
           dataP.splice(dataP.indexOf(idBox), 1);
     		fs.writeFileSync(dataPending, JSON.stringify(dataP, null, 2));
     	}, messageID)
