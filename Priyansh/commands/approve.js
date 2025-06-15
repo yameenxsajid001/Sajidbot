@@ -100,7 +100,7 @@ module.exports.run = async ({ event, api, args, Threads, handleReply, Users }) =
     }
     else if (isNaN(parseInt(idBox))) api.sendMessage("[ ERR ] The ID you entered is not valid", threadID, messageID);
     else if (data.includes(idBox)) api.sendMessage(`[ - ] ID ${idBox} pre-approved!`, threadID, messageID);
-   	else api.sendMessage("●●●━━━━━◥💜◤━━━━━●●●\n\n[ OK ]  *(^_^)/*  ApKa Group Approved KRr DiYa Gya Hai Enjoy☆ ┑(￣▽￣)┍ ☆ BOT OWNER ✦ YAMEEN ✦\n\n●●●━━━━━◥💜◤━━━━━●●●", idBox, (error, info) => {
+   	else api.sendMessage("[ OK ]ApKa Group\nApproved KRr DiYa Gya Hai Enjoy☆\n☆BOT OWNER✦ ŶÁМĔĔŃ ĶĤÁŃ ✦", idBox, (error, info) => {
    		api.changeNickname(` 》 ${global.config.PREFIX} 《 ❃ ➠ ${(!global.config.BOTNAME) ? "" : global.config.BOTNAME}`, idBox, global.data.botID);
       const axios = require('axios');
 	const request = require('request');
@@ -116,7 +116,7 @@ module.exports.run = async ({ event, api, args, Threads, handleReply, Users }) =
 	let ext = res.data.url.substring(res.data.url.lastIndexOf(".") + 1);
 	let callback = function () {
       api.sendMessage({body: `❒❒ BOT CONNECTED ❒❒\n=====================\n\n┏━━━━ 🖤 ━━━━┓
-   ✦❥⋆⃝𝗝𝗢𝗥𝗗𝗔𝗡 ✦ 
+   ✦❥⋆⃝Yameen ✦ 
 ┗━━━    🖤 ━━━━┛\n\n=====================\n➪ BOT: ${global.config.BOTNAME}\n➪ Prefix: ${global.config.PREFIX}\n➪ Users: ${global.data.allUserID.length}\n➪ Groups: ${global.data.allThreadID.length}\n=====================\n[]---------------------------------------[]\n\nUse '${global.config.PREFIX}Help' T0o View The Commands That Available!(ღ˘⌣˘ღ)\n\n[]---------------------------------------[]\n⌨ Made by: ${firstname}\n`, mentions: [{
                            tag: firstname,
                            id: admID,
