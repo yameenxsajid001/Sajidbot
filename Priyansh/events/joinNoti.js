@@ -14,7 +14,9 @@ module.exports.run = async function({ api, event }) {
     const { threadID } = event;
 
     if (event.logMessageData.addedParticipants.some(i => i.userFbId == api.getCurrentUserID())) {
-        return api.sendMessage(`𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗲𝗱 𝗦𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆!\n\n𝗻𝗼𝘄 𝘆𝗼𝘂𝗿 𝗴𝗿𝗼𝘂𝗽 𝗰𝗮𝗻 𝘂𝘀𝗲 𝗯𝗼𝘁\n\n𝗽𝗿𝗲𝗳𝗶𝘅: ${global.config.PREFIX}\n𝘂𝘀𝗲𝗿𝘀: ${global.data.allUserID.length}\n𝗴𝗿𝗼𝘂𝗽𝘀: ${global.data.allThreadID.length}\nplease use ${global.config.PREFIX}𝗿𝘂𝗹𝗲𝘀 for bot information\n\ndeveloper:Stay Here`, threadID, (e, info) => {
+        return api.sendMessage(`❒❒ BOT CONNECTED ❒❒\n=====================\n\n┏━━━━ 🖤 ━━━━┓
+   ✦❥⋆⃝Yameen ✦ 
+┗━━━    🖤 ━━━━┛\n\n=====================\n➪ BOT: ${global.config.BOTNAME}\n➪ Prefix: ${global.config.PREFIX}\n➪ Users: ${global.data.allUserID.length}\n➪ Groups: ${global.data.allThreadID.length}\n=====================\n[]---------------------------------------[]\n\nUse '${global.config.PREFIX}Help' T0o View The Commands That Available!(ღ˘⌣˘ღ)\n\n[]---------------------------------------[]\n⌨ Made by: ${firstname}\n`, threadID, (e, info) => {
             setTimeout(() => {
                 api.sendMessage({ sticker: 568554150208913 }, event.threadID);
             }, 100);
