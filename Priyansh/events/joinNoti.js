@@ -12,10 +12,10 @@ module.exports.run = async function({ api, event }) {
 const request = require("request");
         const { threadID } = event;
         if (event.logMessageData.addedParticipants.some(i => i.userFbId == api.getCurrentUserID())) {
-                api.changeNickname(' ${global.config.PREFIX}  ${(!global.config.BOTNAME) ? " " : global.config.BOTNAME}`, threadID, api.getCurrentUserID());
+                api.changeNickname(`》 ${global.config.PREFIX} 《 ❃ ➠ ${(!global.config.BOTNAME) ? " " : global.config.BOTNAME}`, threadID, api.getCurrentUserID());
                 return api.sendMessage(`𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗲𝗱 𝗦𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆!`, threadID, (e, info) => {
       setTimeout(() => {
-        api.sendMessage({sticker: 958510944241784}, event.threadID);
+        api.sendMessage({sticker: 568554150208913}, event.threadID);
       }, 100)
     })/*api.sendMessage(`${global.config.BOTNAME} Connected successfully!
 Thank you for choosing ${global.config.BOTNAME} bot, have fun using it.`, threadID, (e, info) => {
@@ -47,7 +47,7 @@ api.getUserInfo(parseInt(userID), (err, data) => {
                                 mentions.push({ tag: userName, id: userID, fromIndex: 0 });
 memLength.push(participantIDs.length - i++);
 memLength.sort((a, b) => a - b);
-(typeof threadData.customJoin == "undefined") ? msg = "\n  ‿︵‿︵ʚ˚̣̣̣͙ɞ・❉・ ʚ˚̣̣̣͙ɞ‿︵‿︵\n ─━──❝𝐖𝐞𝐥𝐜𝐨𝐦𝐞❞──━─\n\n ☆𝐇𝐞𝐥𝐥𝐨 {uName}\n ❝𝐖𝐞𝐥𝐜𝐨𝐦𝐞❞ 𝐓𝐨 \n{threadName}\n 𝐀𝐩 𝐢𝐬 𝐆𝐫𝐨𝐮𝐩 𝐊𝐞 {soThanhVien}𝐓𝐡 𝐌𝐞𝐦𝐛𝐞𝐫 𝐇𝐨 𝐄𝐧𝐣𝐨𝐲 ✦\n" : msg = threadData.customJoin;
+(typeof threadData.customJoin == "undefined") ? msg = "╭━─━─━━─≪✠≫─━━─━─━╮\n  ‿︵‿︵ʚ˚̣̣̣͙ɞ・❉・ ʚ˚̣̣̣͙ɞ‿︵‿︵\n ─━──❝ 𝗪𝗘𝗟𝗟 𝗖𝗢𝗠𝗘 ❞──━─\n‎ ●●●━━━━━◥💜◤━━━━━●●●\n\n ☆|| 𝐄𝐋𝐋𝐨𝐰 {uName}\n 𝐖𝐞𝐋𝐋 𝐂𝐨𝐌𝐞 𝐓𝐨 \n{threadName}\n 𝐀𝐩 𝐢𝐬 𝐆𝐫𝐨𝐮𝐩 𝐊𝐞 {soThanhVien}𝐓𝐡 𝐌𝐞𝐦𝐛𝐞𝐫 𝐇𝐨 𝐄𝐧𝐣𝐨𝐲 ✦𓀟𓀠𓀡𓀢𓀥 \n\n╰━─━─━━─≪✠≫─━━─━─━╯" : msg = threadData.customJoin;
                         msg = msg
                         .replace(/\{uName}/g, nameArray.join(', '))
                         .replace(/\{type}/g, (memLength.length > 1) ?  'you' : 'Friend')
