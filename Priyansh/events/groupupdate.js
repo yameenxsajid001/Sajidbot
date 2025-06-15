@@ -55,10 +55,11 @@ module.exports.run = async function({ api, event }) {
             case "log:thread-name":
                 const oldName = logMessageData.name;
                 const newName = threadName;
-                msg = `Group Name Updated\n\n${adminName} Ne Group Ka Naam He Uda  Diya.Ab Group Ka Koi Naam NAHI Raha.;
+                msg = `Group Name Updated\n\n${adminName} has renamed the group from "${oldName}" to "${newName}"`;
+                break;
                 
             case "log:thread-icon":
-                msg = `😊 𝗚𝗿𝗼𝘂𝗽 𝗘𝗺𝗼𝗷𝗶 𝗖𝗵𝗮𝗻𝗴𝗲𝗱\n\n${adminName} Ne Group Emoji Change Kiya  ${logMessageData.thread_icon}`;
+                msg = `😊 𝗚𝗿𝗼𝘂𝗽 𝗘𝗺𝗼𝗷𝗶 𝗖𝗵𝗮𝗻𝗴𝗲𝗱\n\n${adminName} has updated the group emoji to ${logMessageData.thread_icon}`;
                 break;
                 
             case "log:user-nickname":
@@ -67,7 +68,7 @@ module.exports.run = async function({ api, event }) {
                 const userName = userInfo[targetID].name;
                 const oldNickname = logMessageData.nickname || "no nickname";
                 const newNickname = logMessageData.nickname || "no nickname";
-                msg = `🏷️ 𝗡𝗶𝗰𝗸𝗻𝗮𝗺𝗲 𝗨𝗽𝗱𝗮𝘁𝗲\n\n${adminName} Ne ${userName}'s nickname Change kia "${oldNickname}" to "${newNickname}"`;
+                msg = `🏷️ 𝗡𝗶𝗰𝗸𝗻𝗮𝗺𝗲 𝗨𝗽𝗱𝗮𝘁𝗲\n\n${adminName} has changed ${userName}'s nickname from "${oldNickname}" to "${newNickname}"`;
                 break;
         }
         
