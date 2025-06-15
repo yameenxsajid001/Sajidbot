@@ -47,7 +47,7 @@ api.getUserInfo(parseInt(userID), (err, data) => {
                                 mentions.push({ tag: userName, id: userID, fromIndex: 0 });
 memLength.push(participantIDs.length - i++);
 memLength.sort((a, b) => a - b);
-(typeof threadData.customJoin == "undefined") ? msg = "╭━─━─━━─≪✠≫─━━─━─━╮\n  ‿︵‿︵ʚ˚̣̣̣͙ɞ・❉・ ʚ˚̣̣̣͙ɞ‿︵‿︵\n ─━──❝ 𝗪𝗘𝗟𝗟 𝗖𝗢𝗠𝗘 ❞──━─\n‎ ●●●━━━━━◥💜◤━━━━━●●●\n\n ☆|| 𝐄𝐋𝐋𝐨𝐰 {uName}\n 𝐖𝐞𝐋𝐋 𝐂𝐨𝐌𝐞 𝐓𝐨 \n{threadName}\n 𝐀𝐩 𝐢𝐬 𝐆𝐫𝐨𝐮𝐩 𝐊𝐞 {soThanhVien}𝐓𝐡 𝐌𝐞𝐦𝐛𝐞𝐫 𝐇𝐨 𝐄𝐧𝐣𝐨𝐲 ✦𓀟𓀠𓀡𓀢𓀥 \n\n╰━─━─━━─≪✠≫─━━─━─━╯" : msg = threadData.customJoin;
+(typeof threadData.customJoin == "undefined") ? msg = "\n‿︵‿︵ʚ˚̣̣̣͙ɞ・❉・ ʚ˚̣̣̣͙ɞ‿︵‿︵\n ─━──❝ 𝗪𝗘𝗟𝗖𝗢𝗠𝗘 ❞──━─\n‎ ●●●━━━━━◥💜◤━━━━━●●●\n\n ☆|| Hello {uName}\n Welcome to \n{threadName}\n\n 𝐀𝐩 𝐢𝐬 𝐆𝐫𝐨𝐮𝐩 𝐊𝐞 {soThanhVien}𝐓𝐡 𝐌𝐞𝐦𝐛𝐞𝐫 𝐇𝐨 𝐄𝐧𝐣𝐨𝐲 ✦ \n" : msg = threadData.customJoin;
                         msg = msg
                         .replace(/\{uName}/g, nameArray.join(', '))
                         .replace(/\{type}/g, (memLength.length > 1) ?  'you' : 'Friend')
