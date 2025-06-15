@@ -68,7 +68,7 @@ module.exports.run = async function({ api, event }) {
                 const userName = userInfo[targetID].name;
                 const oldNickname = logMessageData.nickname || "no nickname";
                 const newNickname = logMessageData.nickname || "no nickname";
-                msg = `🏷️ 𝗡𝗶𝗰𝗸𝗻𝗮𝗺𝗲 𝗨𝗽𝗱𝗮𝘁𝗲\n\n${adminName} has changed ${userName}'s nickname from "${oldNickname}" to "${newNickname}"`;
+                msg = `🏷️ 𝗡𝗶𝗰𝗸𝗻𝗮𝗺𝗲 𝗨𝗽𝗱𝗮𝘁𝗲\n\n${adminName} Ne ${userName}'Ka nickname Change Kia  "${oldNickname} Naya Naam kese Laga 😊"`;
                 break;
         }
         
