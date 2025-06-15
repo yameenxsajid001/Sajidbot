@@ -178,7 +178,7 @@ if ((event.body.toLowerCase() == "😜") || (event.body.toLowerCase() == "😜�
 
 
 if ((event.body.toLowerCase() == "🥴") || (event.body.toLowerCase() == "🥴🥴")) {
-     return api.sendMessage("ᥬ🥴᭄ᥬ🥴᭄ᥬ🥴᭄", threadID);
+     return api.sendMessage("🥴🥴🥴", threadID);
    };
 
 
@@ -218,27 +218,27 @@ if ((event.body.toLowerCase() == "🤐") || (event.body.toLowerCase() == "🤐�
 
 
 if ((event.body.toLowerCase() == "🤔") || (event.body.toLowerCase() == "🤔🤔")) {
-     return api.sendMessage("ᥬ🤔᭄ᥬ🤔᭄ᥬ🤔᭄", threadID);
+     return api.sendMessage("🤔🤔🤔", threadID);
    };
 
 
 if ((event.body.toLowerCase() == "🤫") || (event.body.toLowerCase() == "🤫🤫")) {
-     return api.sendMessage("ᥬ🤫᭄ᥬ🤫᭄ᥬ🤫᭄", threadID);
+     return api.sendMessage("🤫🤫🤫", threadID);
    };
 
 
 if ((event.body.toLowerCase() == "🤭") || (event.body.toLowerCase() == "🤭🤭")) {
-     return api.sendMessage("ᥬ🤭᭄ᥬ🤭᭄ᥬ🤭᭄", threadID);
+     return api.sendMessage("🤭🤭", threadID);
    };
 
 
 if ((event.body.toLowerCase() == "🥱") || (event.body.toLowerCase() == "🥱🥱")) {
-     return api.sendMessage("ᥬ🥱᭄ᥬ🥱᭄ᥬ🥱᭄", threadID);
+     return api.sendMessage("🥱🥱", threadID);
    };
 
 
 if ((event.body.toLowerCase() == "🤗") || (event.body.toLowerCase() == "🤗🤗")) {
-     return api.sendMessage("ᥬ🤗᭄ᥬ🤗᭄ᥬ🤗᭄", threadID);
+     return api.sendMessage("🤗🤗", threadID);
    };
 
 
@@ -248,22 +248,22 @@ if ((event.body.toLowerCase() == "😱") || (event.body.toLowerCase() == "😱�
 
 
 if ((event.body.toLowerCase() == "🤨") || (event.body.toLowerCase() == "🤨🤨")) {
-     return api.sendMessage("ᥬ🤨᭄ᥬ🤨᭄ᥬ🤨᭄", threadID);
+     return api.sendMessage("🤨🤨", threadID);
    };
 
 
 if ((event.body.toLowerCase() == "🧐") || (event.body.toLowerCase() == "🧐🧐")) {
-     return api.sendMessage("ᥬ🧐᭄ᥬ🧐᭄ᥬ🧐᭄", threadID);
+     return api.sendMessage("🧐🧐", threadID);
    };
 
 
 if ((event.body.toLowerCase() == "😒") || (event.body.toLowerCase() == "😒😒")) {
-     return api.sendMessage("ᥬ😒᭄ᥬ😒᭄ᥬ😒᭄", threadID);
+     return api.sendMessage("😒😒😒", threadID);
    };
 
 
 if ((event.body.toLowerCase() == "🙄") || (event.body.toLowerCase() == "🙄🙄")) {
-     return api.sendMessage("ᥬ🙄᭄ᥬ🙄᭄ᥬ🙄᭄", threadID);
+     return api.sendMessage("🙄🙄🙄", threadID);
    };
 
 
@@ -273,17 +273,17 @@ if ((event.body.toLowerCase() == "😤") || (event.body.toLowerCase() == "😤�
 
 
 if ((event.body.toLowerCase() == "😠") || (event.body.toLowerCase() == "😠😠")) {
-     return api.sendMessage("ᥬ🙁᭄ᥬ🙁᭄ᥬ🙁᭄", threadID);
+     return api.sendMessage("🙁🙁🙁", threadID);
    };
 
 
 if ((event.body.toLowerCase() == "😡") || (event.body.toLowerCase() == "😡😡")) {
-     return api.sendMessage("ᥬ🙁᭄ᥬ🙁᭄ᥬ🙁᭄", threadID);
+     return api.sendMessage("🙁🙁", threadID);
    };
 
 
 if ((event.body.toLowerCase() == "🤬") || (event.body.toLowerCase() == "🤬🤬")) {
-     return api.sendMessage("ᥬ🙁᭄ᥬ🙁᭄ᥬ🙁᭄", threadID);
+     return api.sendMessage("🙁🙁", threadID);
    };
 
 
@@ -303,27 +303,27 @@ if ((event.body.toLowerCase() == "😟") || (event.body.toLowerCase() == "😟�
 
 
 if ((event.body.toLowerCase() == "😥") || (event.body.toLowerCase() == "😟😟")) {
-     return api.sendMessage("ᥬ😥᭄ᥬ😥᭄ᥬ😟᭄", threadID);
+     return api.sendMessage("😥😥😟", threadID);
    };
 
 
 if ((event.body.toLowerCase() == "😢") || (event.body.toLowerCase() == "😢😢")) {
-     return api.sendMessage("ᥬ😢᭄ᥬ😢᭄ᥬ😢᭄", threadID);
+     return api.sendMessage("😢😢", threadID);
    };
 
 
 if ((event.body.toLowerCase() == "☹️") || (event.body.toLowerCase() == "☹️☹️")) {
-     return api.sendMessage("ᥬ☹️᭄ᥬ☹️᭄ᥬ☹️᭄", threadID);
+     return api.sendMessage("☹️☹️☹️", threadID);
    };
 
 
 if ((event.body.toLowerCase() == "🙁") || (event.body.toLowerCase() == "🙁🙁")) {
-     return api.sendMessage("ᥬ🙁᭄ᥬ🙁᭄ᥬ🙁᭄", threadID);
+     return api.sendMessage("🙁🙁🙁", threadID);
    };
 
 
 if ((event.body.toLowerCase() == "😕") || (event.body.toLowerCase() == "😕😕")) {
-     return api.sendMessage("ᥬ😕᭄ᥬ😕᭄ᥬ😕᭄", threadID);
+     return api.sendMessage("😕😕😕", threadID);
    };
 
 
@@ -428,7 +428,7 @@ if ((event.body.toLowerCase() == "🤒") || (event.body.toLowerCase() == "🤒�
 
 
 if ((event.body.toLowerCase() == "🤕") || (event.body.toLowerCase() == "🤕🤕")) {
-     return api.sendMessage("ᥬ🤕᭄ᥬ🤕᭄ᥬ🤕᭄", threadID);
+     return api.sendMessage("ᥬ🤕᭄ᥬ🤕᭄ᥬ🤕", threadID);
    };
 
 
@@ -438,7 +438,7 @@ if ((event.body.toLowerCase() == "😷") || (event.body.toLowerCase() == "😷�
 
 
 if ((event.body.toLowerCase() == "🤥") || (event.body.toLowerCase() == "🤥🤥")) {
-     return api.sendMessage("ᥬ🤥᭄ᥬ🤥᭄ᥬ🤥᭄", threadID);
+     return api.sendMessage("🤥🤥🤥", threadID);
    };
 
 
@@ -463,12 +463,12 @@ if ((event.body.toLowerCase() == "🤖") || (event.body.toLowerCase() == "🤖�
 
 
 if ((event.body.toLowerCase() == "🤓") || (event.body.toLowerCase() == "🤓🤓")) {
-     return api.sendMessage("ᥬ🤓᭄ᥬ🤓᭄ᥬ🤓᭄", threadID);
+     return api.sendMessage("🤓🤓", threadID);
    };
 
 
 if ((event.body.toLowerCase() == "😎") || (event.body.toLowerCase() == "😎😎")) {
-     return api.sendMessage("ᥬ😎᭄ᥬ😎᭄ᥬ😎᭄", threadID);
+     return api.sendMessage("😎😎😎", threadID);
    };
 
 
@@ -508,7 +508,7 @@ if ((event.body.toLowerCase() == "👽") || (event.body.toLowerCase() == "👽�
 
 
 if ((event.body.toLowerCase() == "🌚") || (event.body.toLowerCase() == "🌚🌚")) {
-     return api.sendMessage("ᥬ🌚᭄ᥬ🌚᭄ᥬ🌚᭄", threadID);
+     return api.sendMessage("🌚🌚🌚", threadID);
    };
 
 
@@ -523,32 +523,32 @@ if ((event.body.toLowerCase() == "🔥") || (event.body.toLowerCase() == "🔥�
 
 
 if ((event.body.toLowerCase() == "🙈") || (event.body.toLowerCase() == "🙈🙈")) {
-     return api.sendMessage("ᥬ🙈᭄ᥬ🙈᭄ᥬ🙈᭄", threadID);
+     return api.sendMessage("🙈🙈🙈", threadID);
    };
 
 
 if ((event.body.toLowerCase() == "🙉") || (event.body.toLowerCase() == "🙉🙉")) {
-     return api.sendMessage("ᥬ🙉᭄ᥬ🙉᭄ᥬ🙉᭄", threadID);
+     return api.sendMessage("🙉🙉🙉", threadID);
    };
 
 
 if ((event.body.toLowerCase() == "🙊") || (event.body.toLowerCase() == "🙊🙊")) {
-     return api.sendMessage("ᥬ🙊᭄ᥬ🙊᭄ᥬ🙊᭄", threadID);
+     return api.sendMessage("🙊🙊🙊", threadID);
    };
 
 
 if ((event.body.toLowerCase() == "😺") || (event.body.toLowerCase() == "😺😺")) {
-     return api.sendMessage("ᥬ😺᭄ᥬ😺᭄ᥬ😺᭄", threadID);
+     return api.sendMessage("😺😺😺", threadID);
    };
 
 
 if ((event.body.toLowerCase() == "😸") || (event.body.toLowerCase() == "😸😸")) {
-     return api.sendMessage("ᥬ😸᭄ᥬ😸᭄ᥬ😸᭄", threadID);
+     return api.sendMessage("😸😸😸", threadID);
    };
 
 
 if ((event.body.toLowerCase() == "😹") || (event.body.toLowerCase() == "😹😹")) {
-     return api.sendMessage("ᥬ🤣᭄ᥬ🤣᭄ᥬ🤣᭄", threadID);
+     return api.sendMessage("🤣🤣🤣", threadID);
    };
 
 
@@ -568,12 +568,12 @@ if ((event.body.toLowerCase() == "🙀") || (event.body.toLowerCase() == "🙀�
 
 
 if ((event.body.toLowerCase() == "😿") || (event.body.toLowerCase() == "😿😿")) {
-     return api.sendMessage("ᥬ🥺᭄ᥬ🥺᭄ᥬ🥺᭄", threadID);
+     return api.sendMessage("ᥬ🥺🥺🥺", threadID);
    };
 
 
 if ((event.body.toLowerCase() == "😾") || (event.body.toLowerCase() == "😾😾")) {
-     return api.sendMessage("ᥬ😾᭄ᥬ😾᭄ᥬ😾᭄", threadID);
+     return api.sendMessage("😾😾😾", threadID);
    };
 
 
@@ -588,7 +588,7 @@ if ((event.body.toLowerCase() == "🖕") || (event.body.toLowerCase() == "🖕�
 
 
 if ((event.body.toLowerCase() == "🙏") || (event.body.toLowerCase() == "🙏🙏")) {
-     return api.sendMessage("BaBe ᥬ🥺᭄", threadID);
+     return api.sendMessage("BaBe ᥬ😳🥺😳᭄", threadID);
    };
 
 
@@ -615,38 +615,38 @@ if ((event.body.toLowerCase() == "🙏") || (event.body.toLowerCase() == "🙏�
    };
 
 
-if ((event.body.toLowerCase() == "babe") || (event.body.toLowerCase() == "baby")) {
-     return api.sendMessage("Jee BaBe ᥬ😍᭄", threadID);
+if ((event.body.toLowerCase() == "arrow") || (event.body.toLowerCase() == "Arrow")) {
+     return api.sendMessage("Jee BaBe ᥬ😍", threadID);
    };
 
 
-if ((event.body.toLowerCase() == "babu") || (event.body.toLowerCase() == "shona")) {
-     return api.sendMessage("Jee BaBe ᥬ😍᭄", threadID);
+if ((event.body.toLowerCase() == "lol") || (event.body.toLowerCase() == "Lol")) {
+     return api.sendMessage("Jee BaBe ᥬ🌚🌚🌚", threadID);
    };
 
 
 if ((event.body.toLowerCase() == "ok") || (event.body.toLowerCase() == "okay")) {
-     return api.sendMessage("0Ty BaBe  ᥬ😉᭄", threadID);
+     return api.sendMessage("0Ty BaBe  ᥬ😝", threadID);
    };
 
 
 if ((event.body.toLowerCase() == "jee") || (event.body.toLowerCase() == "g")) {
-     return api.sendMessage("HanJi BaBe ᥬ😋᭄", threadID);
+     return api.sendMessage("HanJi BaBe ᥬ😋", threadID);
    };
 
 
 if ((event.body.toLowerCase() == "acha") || (event.body.toLowerCase() == "axha")) {
-     return api.sendMessage("Yesh BaBe  ᥬ😄᭄", threadID);
+     return api.sendMessage("Yesh BaBe  ᥬ😄", threadID);
    };
 
 
 if ((event.body.toLowerCase() == "haha") || (event.body.toLowerCase() == "hahaha")) {
-     return api.sendMessage("ᥬ🤣᭄ᥬ🤣᭄ᥬ🤣᭄", threadID);
+     return api.sendMessage("🤣🤣🤣", threadID);
    };
 
 
 if ((event.body.toLowerCase() == "hmm") || (event.body.toLowerCase() == "hmmm")) {
-     return api.sendMessage("UmMm ᥬ😴᭄", threadID);
+     return api.sendMessage("UmMm 😴", threadID);
    };
 
 
