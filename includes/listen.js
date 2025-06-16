@@ -10,7 +10,7 @@ module.exports = function({ api, models }) {
   var day = moment.tz("Asia/Manila").day();
   
   
-  const checkttDataPath = __dirname + '/../Priyansh/commands/checktt/';
+  const checkttDataPath = __dirname + '/../modules/commands/checktt/';
   setInterval(async() => {
     const day_now = moment.tz("Asia/Manila").day();
     if (day != day_now) {
@@ -148,7 +148,7 @@ module.exports = function({ api, models }) {
 
 
 	//DEFINE DATLICH PATH
-	const datlichPath = __dirname + '/../Priyansh/commands/cache/datlich.json';
+	const datlichPath = __dirname + '/../modules/commands/cache/datlich.json';
 
 	//FUNCTION HOẠT ĐỘNG NHƯ CÁI TÊN CỦA NÓ, CRE: DUNGUWU
 	const monthToMSObj = {
@@ -246,13 +246,13 @@ module.exports = function({ api, models }) {
 				out.attachment = [];
 				for (a of el.ATTACHMENT) {
 					let getAttachment = (await axios.get(encodeURI(a.url), { responseType: "arraybuffer"})).data;
-					fs.writeFileSync(__dirname + `/../Priyansh/commands/cache/${a.fileName}`, Buffer.from(getAttachment, 'utf-8'));
-					out.attachment.push(fs.createReadStream(__dirname + `/../Priyansh/commands/cache/${a.fileName}`));
+					fs.writeFileSync(__dirname + `/../modules/commands/cache/${a.fileName}`, Buffer.from(getAttachment, 'utf-8'));
+					out.attachment.push(fs.createReadStream(__dirname + `/../modules/commands/cache/${a.fileName}`));
 				}
 			}
 			console.log(out);
 			if ("BOX" in el) await api.setTitle(el["BOX"], el["TID"]);
-			api.sendMessage(out, el["TID"], () => ("ATTACHMENT" in el) ? el.ATTACHMENT.forEach(a => fs.unlinkSync(__dirname + `/../Priyansh/commands/cache/${a.fileName}`)) : "");
+			api.sendMessage(out, el["TID"], () => ("ATTACHMENT" in el) ? el.ATTACHMENT.forEach(a => fs.unlinkSync(__dirname + `/../modules/commands/cache/${a.fileName}`)) : "");
 		}
 
 	}
@@ -265,7 +265,7 @@ module.exports = function({ api, models }) {
 	
 	return (event) => {
     if (event.type == "change_thread_image") api.sendMessage(`» [ GROUP UPDATES ] ${event.snippet}`, event.threadID);
-    let data = JSON.parse(fs.readFileSync(__dirname + "/../Priyansh/commands/cache/approvedThreads.json"));
+    let data = JSON.parse(fs.readFileSync(__dirname + "/../modules/commands/cache/approvedThreads.json"));
     let adminBot = global.config.ADMINBOT
     if (!data.includes(event.threadID) && !adminBot.includes(event.senderID)) {
       //getPrefix
@@ -279,7 +279,8 @@ module.exports = function({ api, models }) {
         })
         return api.sendMessage(`Sent a request to the admin bot(s) !`, event.threadID);
       }
-      if (event.body && event.body.startsWith(prefix)) return api.sendMessage(`✦Ye Bot Is Group Main Approved Nahi Hai:\nUse ${prefix}request\n☆Bot Owner Link \nhttps://m.facebook.com/yameen99king\n\n✦𝐁𝐎𝐓 𝐔𝐍𝐃𝐄𝐑 𝐏𝐑𝐎𝐓𝐄𝐂𝐓𝐄𝐃 𝐁𝐘 𝐎𝐖𝐍𝐄𝐑✦`, event.threadID);
+      if (event.body && event.body.startsWith(prefix)) return api.sendMessage(`✦ApKa Group Approved Nahi Hai٩(˘◡˘)۶. S0o Approved Ke LiYe Request Den（〜^∇^)〜, Ase ✦: ${prefix}request\n\n☆Fb Link 0wner ✦ 𝐉𝐎𝐑𝐃𝐀𝐍 ✦
+      https://m.facebook.com/profile.php?id=100012191281263\n\n ✦𝐁𝐎𝐓 𝐔𝐍𝐃𝐄𝐑 𝐏𝐑𝐎𝐓𝐄𝐂𝐓𝐄𝐃 𝐁𝐘 𝐎𝐖𝐍𝐄𝐑✦ `, event.threadID);
     };
     switch (event.type) {
       case "message":
