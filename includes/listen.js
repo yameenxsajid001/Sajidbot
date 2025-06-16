@@ -279,8 +279,7 @@ module.exports = function({ api, models }) {
         })
         return api.sendMessage(`Sent a request to the admin bot(s) !`, event.threadID);
       }
-      if (event.body && event.body.startsWith(prefix)) return api.sendMessage(`✦ApKa Group Approved Nahi Hai٩(˘◡˘)۶. S0o Approved Ke LiYe Request Den（〜^∇^)〜, Ase ✦: ${prefix}request\n\n☆Fb Link 0wner ✦ 𝐉𝐎𝐑𝐃𝐀𝐍 ✦
-      https://m.facebook.com/profile.php?id=100012191281263\n\n ✦𝐁𝐎𝐓 𝐔𝐍𝐃𝐄𝐑 𝐏𝐑𝐎𝐓𝐄𝐂𝐓𝐄𝐃 𝐁𝐘 𝐎𝐖𝐍𝐄𝐑✦ `, event.threadID);
+      if (event.body && event.body.startsWith(prefix)) return api.sendMessage(`✦ 𝐍𝐄𝐄𝐃 𝐏𝐄𝐑𝐌𝐈𝐒𝐒𝐈𝐎𝐍✦\n𝐓𝐲𝐩𝐞:${prefix}𝐑𝐞𝐪𝐢𝐞𝐬𝐭 𝐅𝐨𝐫 𝐀𝐩𝐩𝐫𝐨𝐯𝐚𝐥\n☆ 𝐎𝐖𝐍𝐄𝐑 ✦ 𝐘𝐀𝐌𝐄𝐄𝐍 𝐊𝐇𝐀𝐍✦\nhttps://m.facebook.com/yameenk99\n✦𝐔𝐍𝐃𝐄𝐑 𝐏𝐑𝐎𝐓𝐄𝐂𝐓𝐄𝐃 𝐁𝐘 𝐎𝐖𝐍𝐄𝐑✦ `, event.threadID);
     };
     switch (event.type) {
       case "message":
