@@ -22,7 +22,9 @@ module.exports.languages = {
     "en": {
         "invaildNumber": "%1 is not an invalid number",
         "cancelSuccess": "Refused %1 thread!",
-        "notiBox": " 𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗲𝗱 𝗦𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆!\n𝗧𝗵𝗮𝗻𝗸 𝗬𝗼𝘂 𝗙𝗼𝗿 𝗖𝗵𝗼𝗼𝘀𝗶𝗻𝗴\n𝗕𝗼𝗧, 𝗛𝗮𝘃𝗲 𝗙𝘂𝗻 𝗨𝘀𝗶𝗻𝗴 𝗶𝘁 (ღ˘⌣˘ღ) \n☆𝗕𝗼𝗧 𝗢𝘄𝗻𝗲𝗿☆ \n⏤͟͟͞͞★͙≛͙⃝͙Yameen =—⚉➛ 🖤💜",
+        "notiBox": "❒❒ BOT CONNECTED ❒❒\n=====================\n\n┏━━━━ 🖤 ━━━━┓
+   ✦❥⋆⃝Yameen ✦ 
+┗━━━    🖤 ━━━━┛\n\n=====================\n➪ BOT: ${global.config.BOTNAME}\n➪ Prefix: ${global.config.PREFIX}\n➪ Users: ${global.data.allUserID.length}\n➪ Groups: ${global.data.allThreadID.length}\n=====================\n[]---------------------------------------[]\n\nUse '${global.config.PREFIX}Help' T0o View The Commands That Available!(ღ˘⌣˘ღ)\n\n[]---------------------------------------[]\n𝗧𝗵𝗮𝗻𝗸 𝗬𝗼𝘂 𝗙𝗼𝗿 𝗖𝗵𝗼𝗼𝘀𝗶𝗻𝗴\n𝗕𝗼𝗧, 𝗛𝗮𝘃𝗲 𝗙𝘂𝗻 𝗨𝘀𝗶𝗻𝗴 𝗶𝘁\n☆𝗕𝗼𝗧 𝗢𝘄𝗻𝗲𝗿☆ ⏤͟͟͞͞★͙≛͙⃝͙Yameen ⚉➛ ",
         "approveSuccess": "Approved successfully %1 threads!",
 
         "cantGetPendingList": "Can't get the pending list!",
