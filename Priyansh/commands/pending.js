@@ -22,7 +22,7 @@ module.exports.languages = {
     "en": {
         "invaildNumber": "%1 is not an invalid number",
         "cancelSuccess": "Refused %1 thread!",
-        "notiBox": "ㅤ╭𓆩͡99巛😍ᯤᯱᯱᯱᯱᯱᯱᯱ ᯤᯱᯱᯱ࿐ ╮\n   ╰─────────────╯\n         🫡🫡🫡🫡🫡🫡\n    I  Jump Successfully😁\n         Owner 𓆩yameen💖𓆪\n╰───────────────╯",
+        "notiBox": "ㅤ╭𓆩͡99巛😒ᯤᯱᯱᯱᯱᯱᯱᯱ ᯤᯱᯱᯱ࿐ ╮\n   ╰─────────────╯\n         🫡🫡🫡🫡🫡🫡\n    I  Jump Successfully😁\n         Owner 𓆩yameen💖𓆪\n╰───────────────╯",
         "approveSuccess": "Approved successfully %1 threads!",
 
         "cantGetPendingList": "Can't get the pending list!",
