@@ -1,96 +1,82 @@
 module.exports.config = {
-        name: "adminUpdate",
-        eventType: ["log:thread-admins","log:thread-name", "log:user-nickname","log:thread-icon","log:thread-color"],
-        version: "1.0.1",
-        credits: "𝙋𝙧𝙞𝙮𝙖𝙣𝙨𝙝 𝙍𝙖𝙟𝙥𝙪𝙩",
-        description: "Update team information quickly",
-    envConfig: {
-        sendNoti: true,
-    }
+    name: "groupnotify",
+    eventType: ["log:thread-admins", "log:thread-call", "log:thread-image", "log:thread-name", "log:thread-icon", "log:user-nickname"],
+    version: "1.0.0",
+    credits: "YourName",
+    description: "Notifies group about all changes",
+    dependencies: {}
 };
 
-module.exports.run = async function ({ event, api, Threads,Users }) {
-        const fs = require("fs");
-        var iconPath = __dirname + "/emoji.json";
-        if (!fs.existsSync(iconPath)) fs.writeFileSync(iconPath, JSON.stringify({}));
-    const { threadID, logMessageType, logMessageData } = event;
-    const { setData, getData } = Threads;
-
-    const thread = global.data.threadData.get(threadID) || {};
-    if (typeof thread["adminUpdate"] != "undefined" && thread["adminUpdate"] == false) return;
+module.exports.run = async function({ api, event }) {
+    const { threadID, logMessageType, logMessageData, author } = event;
 
     try {
-        let dataThread = (await getData(threadID)).threadInfo;
-        switch (logMessageType) {
-            case "log:thread-admins": {
-                if (logMessageData.ADMIN_EVENT == "add_admin") {
-                    dataThread.adminIDs.push({ id: logMessageData.TARGET_ID })
-                    if (global.configModule[this.config.name].sendNoti) api.sendMessage(`»» NOTICE «« Update user ${logMessageData.TARGET_ID} Mil Gya Admin Tujhe Ja Khus Hoja 😸`, threadID, async (error, info) => {
-                        if (global.configModule[this.config.name].autoUnsend) {
-                            await new Promise(resolve => setTimeout(resolve, global.configModule[this.config.name].timeToUnsend * 1000));
-                            return api.unsendMessage(info.messageID);
-                        } else return;
-                    });
-                }
-                else if (logMessageData.ADMIN_EVENT == "remove_admin") {
-                    dataThread.adminIDs = dataThread.adminIDs.filter(item => item.id != logMessageData.TARGET_ID);
-                    if (global.configModule[this.config.name].sendNoti) api.sendMessage(`»» NOTICE «« Update user ${logMessageData.TARGET_ID} Ha Bhai Agaya Swad Tu Admin Rehne Ke Layak Ni Tha 😹`, threadID, async (error, info) => {
-                        if (global.configModule[this.config.name].autoUnsend) {
-                            await new Promise(resolve => setTimeout(resolve, global.configModule[this.config.name].timeToUnsend * 1000));
-                            return api.unsendMessage(info.messageID);
-                        } else return;
-                    });
-                }
-                break;
-            }
+        let msg = "";
+        const threadInfo = await api.getThreadInfo(threadID);
+        const threadName = threadInfo.threadName;
 
-            case "log:thread-icon": {
-                    let preIcon = JSON.parse(fs.readFileSync(iconPath));
-                    dataThread.threadIcon = event.logMessageData.thread_icon || "👍";
-                if (global.configModule[this.config.name].sendNoti) api.sendMessage(`» [ GROUP UPDATE ] y.replace("emoji", "icon")}\n» Original icon: ${preIcon[threadID] || "unknown"}`, threadID, async (error, info) => {
-                        preIcon[threadID] = dataThread.threadIcon;
-                        fs.writeFileSync(iconPath, JSON.stringify(preIcon));
-                    if (global.configModule[this.config.name].autoUnsend) {
-                        await new Promise(resolve => setTimeout(resolve, global.configModule[this.config.name].timeToUnsend * 1000));
-                        return api.unsendMessage(info.messageID);
-                    } else return;
-                });
-                break;
-            }
-            case "log:thread-color": {
-                    dataThread.threadColor = event.logMessageData.thread_color || "🌤";
-                if (global.configModule[this.config.name].sendNoti) api.sendMessage(`» [ GROUP UPDATE ]\n» ${event.logMessageBody.replace("Theme", "color")}`, threadID, async (error, info) => {
-                    if (global.configModule[this.config.name].autoUnsend) {
-                        await new Promise(resolve => setTimeout(resolve, global.configModule[this.config.name].timeToUnsend * 1000));
-                        return api.unsendMessage(info.messageID);
-                    } else return;
-                });
-                break;
-            }
-
-            case "log:user-nickname": {
-                dataThread.nicknames[logMessageData.participant_id] = logMessageData.nickname;
-                if (typeof global.configModule["nickname"] != "undefined" && !global.configModule["nickname"].allowChange.includes(threadID) && !dataThread.adminIDs.some(item => item.id == event.author) || event.author == api.getCurrentUserID()) return;
-                if (global.configModule[this.config.name].sendNoti) api.sendMessage(`»» NOTICE «« Update user nicknames ${logMessageData.participant_id} to: ${(logMessageData.nickname.length == 0) ? "original name": logMessageData.nickname}`, threadID, async (error, info) => {
-                    if (global.configModule[this.config.name].autoUnsend) {
-                        await new Promise(resolve => setTimeout(resolve, global.configModule[this.config.name].timeToUnsend * 1000));
-                        return api.unsendMessage(info.messageID);
-                    } else return;
-                });
-                break;
-            }
-
-            case "log:thread-name": {
-                dataThread.threadName = event.logMessageData.name || "No name";
-                if (global.configModule[this.config.name].sendNoti) api.sendMessage(`»» NOTICE «« Update the group name to ${dataThread.threadName}`, threadID, async (error, info) => {
-                    if (global.configModule[this.config.name].autoUnsend) {
-                        await new Promise(resolve => setTimeout(resolve, global.configModule[this.config.name].timeToUnsend * 1000));
-                        return api.unsendMessage(info.messageID);
-                    } else return;
-                });
-                break;
-            }
+        // Get user name who made the change
+        let adminName = "Someone";
+        if (author) {
+            const userInfo = await api.getUserInfo(author);
+            adminName = userInfo[author].name;
         }
-        await setData(threadID, { threadInfo: dataThread });
-    } catch (e) { console.log(e) };
-          }
+
+        switch(logMessageType) {
+            case "log:thread-admins":
+                if (logMessageData.ADMIN_EVENT == "add_admin") {
+                    const addedAdmin = logMessageData.TARGET_ID;
+                    const userInfo = await api.getUserInfo(addedAdmin);
+                    const adminAddedName = userInfo[addedAdmin].name;
+                    msg = `📢 𝗔𝗱𝗺𝗶𝗻 𝗨𝗽𝗱𝗮𝘁𝗲\n\n${adminName} has promoted ${adminAddedName} to admin!`;
+                } else if (logMessageData.ADMIN_EVENT == "remove_admin") {
+                    const removedAdmin = logMessageData.TARGET_ID;
+                    const userInfo = await api.getUserInfo(removedAdmin);
+                    const adminRemovedName = userInfo[removedAdmin].name;
+                    msg = `📢 𝗔𝗱𝗺𝗶𝗻 𝗨𝗽𝗱𝗮𝘁𝗲\n\n${adminName} has demoted ${adminRemovedName} from admin!`;
+                }
+                break;
+
+            case "log:thread-call":
+                if (logMessageData.event == "group_call_started") {
+                    msg = `📞 𝗖𝗮𝗹𝗹 𝗡𝗼𝘁𝗶𝗳𝗶𝗰𝗮𝘁𝗶𝗼𝗻\n\n${adminName} has started a group call!`;
+                } else if (logMessageData.event == "group_call_ended") {
+                    const callDuration = logMessageData.call_duration;
+                    const minutes = Math.floor(callDuration / 60);
+                    const seconds = callDuration % 60;
+                    msg = `📞 𝗖𝗮𝗹𝗹 𝗘𝗻𝗱𝗲𝗱\n\nGroup call ended after ${minutes}m ${seconds}s`;
+                }
+                break;
+
+            case "log:thread-image":
+                msg = `🖼️ 𝗚𝗿𝗼𝘂𝗽 𝗜𝗺𝗮𝗴𝗲 𝗖𝗵𝗮𝗻𝗴𝗲𝗱\n\n${adminName} has updated the group's profile picture!`;
+                break;
+
+            case "log:thread-name":
+                const oldName = logMessageData.name;
+                const newName = threadName;
+                msg = `✏️ 𝗚𝗿𝗼𝘂𝗽 𝗡𝗮𝗺𝗲 𝗖𝗵𝗮𝗻𝗴𝗲𝗱\n\n${adminName} has renamed the group from "${oldName}" to "${newName}"`;
+                break;
+
+            case "log:thread-icon":
+                msg = `😊 𝗚𝗿𝗼𝘂𝗽 𝗘𝗺𝗼𝗷𝗶 𝗖𝗵𝗮𝗻𝗴𝗲𝗱\n\n${adminName} has updated the group emoji to ${logMessageData.thread_icon}`;
+                break;
+
+            case "log:user-nickname":
+                const targetID = logMessageData.participant_id;
+                const userInfo = await api.getUserInfo(targetID);
+                const userName = userInfo[targetID].name;
+                const oldNickname = logMessageData.nickname || "no nickname";
+                const newNickname = logMessageData.nickname || "no nickname";
+                msg = `🏷️ 𝗡𝗶𝗰𝗸𝗻𝗮𝗺𝗲 𝗨𝗽𝗱𝗮𝘁𝗲\n\n${adminName} has changed ${userName}'s nickname from "${oldNickname}" to "${newNickname}"`;
+                break;
+        }
+
+        if (msg) {
+            api.sendMessage(msg, threadID);
+        }
+
+    } catch (err) {
+        console.error("Error in groupnotify:", err);
+    }
+};
