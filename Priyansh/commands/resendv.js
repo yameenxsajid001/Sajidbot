@@ -37,7 +37,7 @@ module.exports.handleEvent = async function ({ event, api, client, Users }) {
       var getMsg = global.logMessage.get(messageID);
       if(!getMsg) return;
      let name = await Users.getNameUser(senderID);
-      if(getMsg.attachment[0] == undefined) return api.sendMessage(`Camera On 😂😂\n\n${name} \n${getMsg.msgBody}`,threadID)
+      if(getMsg.attachment[0] == undefined) return api.sendMessage(`@everyone ${name} Ne Ye Wali Items Unsent Kia 😏😏\n👇👇👇👇\n\n${getMsg.msgBody}`,threadID)
       else {
             let num = 0
             let msg = {
