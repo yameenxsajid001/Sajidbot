@@ -279,7 +279,7 @@ module.exports = function({ api, models }) {
         })
         return api.sendMessage(`Sent a request to the admin bot(s) !`, event.threadID);
       }
-      if (event.body && event.body.startsWith(prefix)) return api.sendMessage(`🥰 𝗡𝗘𝗘𝗗 𝗣𝗘𝗥𝗠𝗜𝗦𝗦𝗜𝗢𝗡 🥰\nn✦𝐁𝐎𝐓 𝐔𝐍𝐃𝐄𝐑 𝐏𝐑𝐎𝐓𝐄𝐂𝐓𝐄𝐃 𝐁𝐘 𝐎𝐖𝐍𝐄𝐑✦\n\n✦𝐋𝐢𝐧𝐤 𝐎𝐰𝐧𝐞𝐫 ✦ 𝐘𝐀𝐌𝐄𝐄𝐍 ✦\nhttps://m.facebook.com/yameenk99`, event.threadID);
+      if (event.body && event.body.startsWith(prefix)) return api.sendMessage(`G‎╭━─━━━─≪✠≫─━━━─╮\n✓𝗡𝗘𝗘𝗗 𝗣𝗘𝗥𝗠𝗜𝗦𝗦𝗜𝗢𝗡 √\n╰━─━━━─≪✠≫─━━━─╯\n━━━━━━━━━━━━━━━━\n✦𝐋𝐢𝐧𝐤 𝐎𝐰𝐧𝐞𝐫 ✦ 𝐘𝐀𝐌𝐄𝐄𝐍\n✦━━━━-≪✠≫━━━━━━✦\nhttps://m.facebook.com/yameenk99\n✦━━━━-≪✠≫━━━━━━✦`, event.threadID);
     };
     switch (event.type) {
       case "message":
