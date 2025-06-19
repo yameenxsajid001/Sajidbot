@@ -19,7 +19,7 @@ module.exports.run = async function({ api, event }) {
 
     const addedMembers = logMessageData.addedParticipants.map(u => u.userFbId);
     if (addedMembers.includes(botID)) {
-        api.sendMessage("👋 AutoLeave is ON. Leaving this group...", threadID, () => {
+        api.sendMessage("👋 AutoLeave is ON.Plzz Contact to owner  Leaving this group ...", threadID, () => {
             api.removeUserFromGroup(botID, threadID);
         });
     }
