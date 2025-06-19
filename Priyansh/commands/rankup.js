@@ -1,7 +1,7 @@
 module.exports.config = {
         name: "rankup",
         version: "1.0.1",
-        hasPermssion: 1,
+        hasPermssion: 2,
         credits: "Mirai Team",
         description: "Thông báo rankup cho từng nhóm, người dùng",
         commandCategory: "system",
