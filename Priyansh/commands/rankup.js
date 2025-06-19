@@ -10,7 +10,7 @@ module.exports.config = {
         },
         cooldowns: 5,
         envConfig: {
-                autoUnsend: true,
+                autoUnsend: false,
                 unsendMessageAfter: 5
         }
 };
