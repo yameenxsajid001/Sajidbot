@@ -31,11 +31,11 @@ module.exports.config = {
     console.log(nameThread)
   
     var formReport = "[❤️] Notice [⚜️]" +
-      "\n\n[⚜️] Box name: " + nameThread +
-      "\n[⚜️] Thread ID: " + event.threadID +
-      "\n[⚜️] Act: {task}" +
-      "\n[⚜️] User name: " + nameUser +
-      "\n[⚜️] UserID: " + event.author +
+      "\n\n[⚜️] Group name: " + nameThread +
+      "\n\n[⚜️] Thread ID: " + event.threadID +
+      "\n\n[⚜️] Act: {task}" +
+      "\n\n[⚜️] User name: " + nameUser +
+      "\n\n[⚜️] UserID: " + event.author +
       "\n\n[⚜️] Time: " + time + "",
       task = "";
     switch (event.logMessageType) {
