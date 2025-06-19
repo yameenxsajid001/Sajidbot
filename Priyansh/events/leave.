@@ -1,5 +1,5 @@
 module.exports.config = {
-	name: "leavej",
+	name: "leave",
 	eventType: ["log:unsubscribe"],
 	version: "1.0.0",
 	credits: "Mirai Team",
