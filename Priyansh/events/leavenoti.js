@@ -40,7 +40,7 @@ module.exports.run = async function({ api, event, Users, Threads }) {
 
         if (existsSync(path)) mkdirSync(path, { recursive: true });
 
-(typeof data.customLeave == "undefined") ? msg = "[⚜️] 👉🏻👉🏻 {name} 👈🏻👈🏻▬▬▬▬\n KO Bhaga diya.{type}  [⚜️]\n🌺🌸🌺 🙏🏻 👉🏻👉🏻👉🏻 {name} 👈🏻👈🏻\n●▬▬▬▬๑۩۩BEHTI HAWA SA THAA WO 😥 uDTI PATANG✨✨ SAA THAA WOO ♥ KAHA GAYA USE DHOONDHO🤔🤔🤔●▬▬▬▬๑۩ 🙏🏻💐<3😊💔\n" : msg = data.customLeave;
+(typeof data.customLeave == "undefined") ? msg = "[⚜️] 👉🏻👉🏻 {name} 👈🏻👈🏻\n Left Kr gue   {type}  [⚜️]" : msg = data.customLeave;
         msg = msg.replace(/\{name}/g, name).replace(/\{type}/g, type).replace(/\{session}/g, hours <= 10 ? "𝙈𝙤𝙧𝙣𝙞𝙣𝙜" : 
     hours > 10 && hours <= 12 ? "𝘼𝙛𝙩𝙚𝙧𝙉𝙤𝙤𝙣" :
     hours > 12 && hours <= 18 ? "𝙀𝙫𝙚𝙣𝙞𝙣𝙜" : "𝙉𝙞𝙜𝙝𝙩").replace(/\{time}/g, time);  
