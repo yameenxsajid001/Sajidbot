@@ -1,64 +1,86 @@
-const axios = require('axios');
-const aiStatus = {}; // To track AI On/Off per thread
+const axios = require("axios");
 
-module.exports.config = { 
-  name: 'ai', 
-  version: '1.1.1', 
-  hasPermssion: 2, 
-  credits: 'AMIR', 
-  description: 'ChatGPT with AI On/Off toggle', 
-  commandCategory: 'AI', 
-  usages: 'Ai [question/on/off]', 
-  cooldowns: 0, 
-}; 
+module.exports.config = {
+  name: "tiktalk",
+  version: "2.0.0",
+  hasPermission: 0,
+  credits: "KOJA-PROJECT",
+  description: "AI chatbot jo 'tiktalk on/off' par kaam karta hai",
+  commandCategory: "AI",
+  usePrefix: false,
+  usages: "tiktalk on / off / clear / status",
+  cooldowns: 5,
+};
 
-module.exports.run = async function({ api, event, args }) {
-  const { threadID, messageID } = event;
-  const input = args.join(" ").toLowerCase();
+let activeThreads = {};
+let userMemory = {};
 
-  // Toggle ON
-  if (input === "on") {
-    aiStatus[threadID] = true;
-    return api.sendMessage("✅ AI Auto-Reply is now ON. Reply to my messages to chat with me.", threadID, messageID);
-  }
+module.exports.handleEvent = async function ({ api, event }) {
+  const { threadID, messageID, senderID, body, messageReply } = event;
 
-  // Toggle OFF
-  if (input === "off") {
-    aiStatus[threadID] = false;
-    return api.sendMessage("❌ AI Auto-Reply is now OFF.", threadID, messageID);
-  }
+  if (!activeThreads[threadID] || !body) return;
+  if (!messageReply || messageReply.senderID !== api.getCurrentUserID()) return;
 
-  // Normal AI usage via command
-  if (!input) {
-    return api.sendMessage("✦ HanJi ✦..", threadID, messageID);
-  }
+  const userQuery = body.trim();
+  if (!userMemory[senderID]) userMemory[senderID] = [];
+
+  const history = userMemory[senderID].join("\n");
+  const fullMessage = `${history}\nUser: ${userQuery}\nBot:`;
+
+  const apiURL = `https://koja-api.web-server.xyz/jarvis?message=${encodeURIComponent(fullMessage)}`;
 
   try {
-    api.sendMessage("Sochny De MereKo...", threadID, messageID); 
-    const res = await axios.get(`https://ccprojectsapis.zetsu.xyz/api/gpt3?ask=${encodeURIComponent(input)}`); 
-    const resu = res.data.data || res.data.result || "Abhi Mera M0oD Nhi Hai 😒";
-    api.sendMessage(resu, threadID, messageID);
+    const res = await axios.get(apiURL);
+    const reply = res.data?.reply?.response || "⚠️ Kuch samajh nahi aaya.";
+
+    userMemory[senderID].push(`User: ${userQuery}`);
+    userMemory[senderID].push(`Bot: ${reply}`);
+
+    if (userMemory[senderID].length > 20) {
+      userMemory[senderID] = userMemory[senderID].slice(-18);
+    }
+
+    return api.sendMessage(reply, threadID, messageID);
   } catch (err) {
-    console.error(err);
-    api.sendMessage("⚠️ Error: Couldn't process your request.", threadID, messageID);
+    console.error("API error:", err.message);
+    return api.sendMessage("❌ Maafi chahta hoon, AI se response nahi mila.", threadID, messageID);
   }
 };
 
-module.exports.handleEvent = async function({ api, event }) {
-  const { threadID, messageID, messageReply, senderID, body } = event;
+module.exports.run = async function ({ api, event, args }) {
+  const { threadID, messageID, senderID } = event;
+  const input = args[0]?.toLowerCase();
 
-  // Only work when AI is enabled and it's a reply to bot
-  if (aiStatus[threadID] && messageReply && messageReply.senderID == api.getCurrentUserID()) {
-    if (!body) return;
+  switch (input) {
+    case "on":
+      activeThreads[threadID] = true;
+      return api.sendMessage("✅ TikTalk AI ab is thread mein active hai.", threadID, messageID);
 
-    try {
-      api.sendMessage("Sochne De MereKo 🤔", threadID, messageID); 
-      const res = await axios.get(`https://ccprojectsapis.zetsu.xyz/api/gpt3?ask=${encodeURIComponent(body)}`);
-      const resu = res.data.data || res.data.result || "😕 No response.";
-      api.sendMessage(resu, threadID, messageID);
-    } catch (err) {
-      console.error(err);
-      api.sendMessage("⚠️ Error while replying.", threadID, messageID);
-    }
+    case "off":
+      delete activeThreads[threadID];
+      return api.sendMessage("❌ TikTalk AI ab is thread mein band hai.", threadID, messageID);
+
+    case "clear":
+      if (args[1] === "all") {
+        userMemory = {};
+        return api.sendMessage("🧹 Sabki memory clear kar di gayi.", threadID, messageID);
+      } else {
+        delete userMemory[senderID];
+        return api.sendMessage("🧹 Aapki memory clear kar di gayi.", threadID, messageID);
+      }
+
+    case "status":
+      if (activeThreads[threadID]) {
+        return api.sendMessage("📶 TikTalk is thread mein *ACTIVE* hai.", threadID, messageID);
+      } else {
+        return api.sendMessage("📴 TikTalk is thread mein *INACTIVE* hai.", threadID, messageID);
+      }
+
+    default:
+      return api.sendMessage(
+        "📘 Commands:\n• tiktalk on\n• tiktalk off\n• tiktalk clear [all]\n• tiktalk status",
+        threadID,
+        messageID
+      );
   }
 };
