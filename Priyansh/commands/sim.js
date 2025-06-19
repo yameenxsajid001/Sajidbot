@@ -1,7 +1,7 @@
 module.exports.config = {
     name: "sim",
     version: "4.3.8",
-    hasPermssion: 2,
+    hasPermssion: 0,
     credits: "Amir",
     description: "Chat with Teach Base Sim",
     commandCategory: "Chat same sim",
