@@ -7,7 +7,7 @@ module.exports.config = {
   name: "joinNoti",
   eventType: ["log:subscribe"],
   version: "1.0.6",
-  credits: "Remade by ChatGPT | Base: Mirai Team",
+  credits: "jojo99king",
   description: "Sends a welcome image and message when a new user or bot joins the group."
 };
 
@@ -29,7 +29,9 @@ module.exports.run = async function ({ api, event, Users }) {
   if (event.logMessageData.addedParticipants.some(i => i.userFbId == botID)) {
     api.changeNickname(`[ ${global.config.PREFIX} ] • ${global.config.BOTNAME || "Bot"}`, threadID, botID);
     return api.sendMessage(
-      "❒❒ BOT CONNECTED ❒❒\n=====================\n\n┏━━━━ 🖤 ━━━━┓\n   ✦❥⋆⃝Yameen ✦ \n┗━━━    🖤 ━━━━┛",
+      "❒❒ BOT CONNECTED ❒❒\n=====================\n\n┏━━━━ 🖤 ━━━━┓
+   ✦❥⋆⃝YameenK99 ✦ 
+┗━━━    🖤 ━━━━┛\n\n=====================\n➪ BOT: ${global.config.BOTNAME}\n➪ Prefix: ${global.config.PREFIX}\n➪ Users: ${global.data.allUserID.length}\n➪ Groups: ${global.data.allThreadID.length}\n=====================\n[]---------------------------------------[]\n\nUse '${global.config.PREFIX}Help' T0o View The Commands That Available\n[]---------------------------------------[]\n ❒❒\n=====================\n",
       threadID
     );
   }
