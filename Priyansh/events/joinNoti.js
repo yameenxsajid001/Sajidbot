@@ -7,7 +7,7 @@ module.exports.config = {
   name: "joinNoti",
   eventType: ["log:subscribe"],
   version: "1.0.6",
-  credits: "KOJA-PROJECT",
+  credits: "jojo99king",
   description: "Sends a welcome image and message when a new user or bot joins the group."
 };
 
@@ -31,7 +31,7 @@ module.exports.run = async function ({ api, event, Users }) {
     return api.sendMessage(
       "❒❒ BOT CONNECTED ❒❒\n=====================\n\n┏━━━━ 🖤 ━━━━┓
    ✦❥⋆⃝YameenK99 ✦ 
-┗━━━    🖤 ━━━━┛\n\n=====================\n➪ BOT: ${global.config.BOTNAME}\n➪ Prefix: ${global.config.PREFIX}\n➪ Users: ${global.data.allUserID.length}\n➪ Groups: ${global.data.allThreadID.length}\n=====================\n[]---------------------------------------[]\n\nUse '${global.config.PREFIX}Help' T0o View The Commands That Available\n[]---------------------------------------[]\n ❒❒\n=====================\n",
+┗━━━    🖤 ━━━━┛\n\n=====================\n[]---------------------------------------[]\n ❒❒\n=====================\n",
       threadID
     );
   }
