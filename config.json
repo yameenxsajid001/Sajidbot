@@ -8,10 +8,10 @@
     "allowInbox": true,
     "autoClean": true,
     "commandDisabled": [
-        ""
+        "rankup.js"
     ],
     "eventDisabled": [
-        ""
+        "LeaveNoti.js"
     ],
     "EMAIL": "",
     "PASSWORD": "",
