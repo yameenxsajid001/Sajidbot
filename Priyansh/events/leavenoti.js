@@ -24,7 +24,7 @@ module.exports.run = async function({ api, event, Users, Threads }) {
 
         if (existsSync(path)) mkdirSync(path, { recursive: true });
 
-        (typeof data.customLeave == "undefined") ? msg = "😂 ĞｏⓄĎ𝐁ⓨ𝑒 😂{name}\n{type}\nBohot Afsoos Howa 🥺🥺" : msg = data.customLeave;
+        (typeof data.customLeave == "undefined") ? msg = "😂😂 Ğ𝐎𝐎Ďβ𝐘ᗴ 🤣🤣\n{name}\n{type} Bohot Afsoos Howa 🥺🥺" : msg = data.customLeave;
         msg = msg.replace(/\{name}/g, name).replace(/\{type}/g, type);
 
         if (existsSync(gifPath)) formPush = { body: msg, attachment: createReadStream(gifPath) }
