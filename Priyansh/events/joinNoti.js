@@ -7,7 +7,7 @@ module.exports.config = {
   name: "joinNoti",
   eventType: ["log:subscribe"],
   version: "1.0.6",
-  credits: "jojo99king",
+  credits: "KOJA-PROJECT",
   description: "Sends a welcome image and message when a new user or bot joins the group."
 };
 
