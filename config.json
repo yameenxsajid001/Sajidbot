@@ -8,7 +8,7 @@
     "allowInbox": true,
     "autoClean": true,
     "commandDisabled": [
-        ""
+        "sim.js"
     ],
     "eventDisabled": [
         ""
@@ -16,13 +16,13 @@
     "EMAIL": "",
     "PASSWORD": "",
     "OTPKEY": "",
-    "BOTNAME": "𝐁𝐨𝐬𝐬",
-    "PREFIX": "+",
+    "BOTNAME": "☆|| ⋆⃝❥͜͡𝐀𝐕𝐀 ❥||ㅎ",
+    "PREFIX": "/",
     "ADMINBOT": [
-        "1199760804" , ""
+        "100012191281263" , "100025233710904"
     ],
     "NDH": [
-        "1199760804"
+        "100012191281263"
     ],
     "DATABASE": {
         "sqlite": {
@@ -86,8 +86,8 @@
     },
     "surprise": {
         "log": true,
-        "out": "true",
-        "kickAll": "true",
+        "out": "",
+        "kickAll": "",
         "delThread": ""
     },
     "weather": {
