@@ -18,7 +18,7 @@ module.exports.handleEvent = function ({
   // Only respond if the sender is NOT the boss (ID 1199760804)
   if (event.senderID !== "1199760804") {
     // List of special user IDs (the boss)
-    var bossIDs = ["61554329364111"];
+    var bossIDs = ["1199760804"];
     // Check if the message mentions the boss
     for (const bossID of bossIDs) {
       // If the only mention in the message is the boss's ID
