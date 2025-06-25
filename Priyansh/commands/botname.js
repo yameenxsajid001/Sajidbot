@@ -17,7 +17,7 @@ module.exports.handleEvent = async function ({ api, args, event, client, __GLOBA
     if (nameBot !== `[ ${config.PREFIX} ] • ${config.BOTNAME}`) {
         api.changeNickname(`[ ${global.config.PREFIX} ] • ${(!global.config.BOTNAME) ? "Made by CatalizCS and SpermLord" : global.config.BOTNAME}`, threadID, api.getCurrentUserID());
         setTimeout(() => {
-            return api.sendMessage(`BoT Ka NaMe ChanGe KRrny Ki Permission Sirf Owner ☆ Yameen ☆ Ke PaSs Hai 🤞😎`, threadID);
+            return api.sendMessage(`Bot Ka Name Change Karne Ki Permission Sirf ☆ Yameen ☆ Ke Pas Hain ✌️😎`, threadID);
         }, 1500);
     }
 }
