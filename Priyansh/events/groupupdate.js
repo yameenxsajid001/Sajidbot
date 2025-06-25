@@ -28,12 +28,12 @@ module.exports.run = async function({ api, event }) {
                     const addedAdmin = logMessageData.TARGET_ID;
                     const userInfo = await api.getUserInfo(addedAdmin);
                     const adminAddedName = userInfo[addedAdmin].name;
-                    msg = `📢 𝗔𝗱𝗺𝗶𝗻 𝗨𝗽𝗱𝗮𝘁𝗲\n\n${adminName} has promoted ${adminAddedName} to admin!`;
+                    msg = `📢 𝗔𝗱𝗺𝗶𝗻 𝗨𝗽𝗱𝗮𝘁𝗲\n\nCongratulations ${adminName} Ne  ${adminAddedName} Ko Admin Bana Diya 😒!`;
                 } else if (logMessageData.ADMIN_EVENT == "remove_admin") {
                     const removedAdmin = logMessageData.TARGET_ID;
                     const userInfo = await api.getUserInfo(removedAdmin);
                     const adminRemovedName = userInfo[removedAdmin].name;
-                    msg = `📢 𝗔𝗱𝗺𝗶𝗻 𝗨𝗽𝗱𝗮𝘁𝗲\n\n${adminName} has demoted ${adminRemovedName} from admin!`;
+                    msg = `📢 𝗔𝗱𝗺𝗶𝗻 𝗨𝗽𝗱𝗮𝘁𝗲\n\nLatest News 😂 ${adminName} Ne ${adminRemovedName} Ko Group Admin Se Remove Kar Diya 🤣!`;
                 }
                 break;
 
@@ -49,7 +49,7 @@ module.exports.run = async function({ api, event }) {
                 break;
 
             case "log:thread-image":
-                msg = `🖼️ 𝗚𝗿𝗼𝘂𝗽 𝗜𝗺𝗮𝗴𝗲 𝗖𝗵𝗮𝗻𝗴𝗲𝗱\n\n${adminName} has updated the group's profile picture!`;
+                msg = `🖼️ 𝗚𝗿𝗼𝘂𝗽 𝗜𝗺𝗮𝗴𝗲 𝗖𝗵𝗮𝗻𝗴𝗲𝗱\n\n${adminName} Ne Group Profile Picture Tabdeel Kar Diya 🤗!`;
                 break;
 
             case "log:thread-name":
@@ -67,8 +67,8 @@ module.exports.run = async function({ api, event }) {
                 const userInfo = await api.getUserInfo(targetID);
                 const userName = userInfo[targetID].name;
                 const oldNickname = logMessageData.nickname || "no nickname";
-                const newNickname = logMessageData.nickname || "no nickname";
-                msg = `🏷️ 𝗡𝗶𝗰𝗸𝗻𝗮𝗺𝗲 𝗨𝗽𝗱𝗮𝘁𝗲\n\n${adminName} has changed ${userName}'s nickname from "${oldNickname}" to "${newNickname}"`;
+                const newNickname = logMessageData.nickname || "Koi Nickname NAHI Raha Ab 😔";
+                msg = `🏷️ 𝗡𝗶𝗰𝗸𝗻𝗮𝗺𝗲 𝗨𝗽𝗱𝗮𝘁𝗲\n\n${adminName} Ne ${userName}'s Nick Change Kr Ke "${oldNickname}" Rakh Diya "${newNickname}"`;
                 break;
         }
 
