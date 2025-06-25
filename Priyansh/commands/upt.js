@@ -27,7 +27,7 @@ const time = process.uptime(),
     var arraytag = [];
         arraytag.push({id: mention});
     var a = function (a) { api.sendMessage(a, event.threadID); }
-a(`↦𝗕𝗼𝗧 𝗶𝘀 𝗥𝘂𝗻𝗻𝗶𝗻𝗴 ${hours}𝗛𝗿𝘀:${minutes}𝗠𝗶𝗻𝘀:${seconds}𝗦𝗲𝗰𝘀`);
+a(`Bot Is Running ${hours} Hours:${minutes} Minutes:${seconds} Seconds`);
   
 
   }
