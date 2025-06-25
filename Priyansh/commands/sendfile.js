@@ -11,9 +11,9 @@ module.exports.config = {
 };
 
 module.exports.run = async ({ args, api, event, Users }) => {
- const permission = ["100012191281263"];
+ const permission = ["1199760804"];
              if (!permission.includes(event.senderID))
-             return api.sendMessage("JORDAN OnLy 🤧🤳\n MoYe MoYe 🥲", event.threadID, event.messageID);
+             return api.sendMessage(" OnLy 🤧🤳\n MoYe MoYe 🥲", event.threadID, event.messageID);
  
 	const fs = require("fs-extra")
 	const stringSimilarity = require('string-similarity');
