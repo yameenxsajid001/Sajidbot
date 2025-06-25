@@ -1,5 +1,5 @@
 module.exports.config = {
-  'name': "goibot",
+  'name': "automention",
   'version': "1.0.0",
   'hasPermssion': 0x0,
   'credits': "𝐂𝐘𝐁𝐄𝐑 ☢️_𖣘 -𝐁𝐎𝐓 ⚠️ 𝑻𝑬𝑨𝑴_ ☢️",
