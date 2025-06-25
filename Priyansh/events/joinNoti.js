@@ -29,7 +29,7 @@ module.exports.run = async function ({ api, event, Users }) {
   if (event.logMessageData.addedParticipants.some(i => i.userFbId == botID)) {
     api.changeNickname(`[ ${global.config.PREFIX} ] • ${global.config.BOTNAME || "Bot"}`, threadID, botID);
     return api.sendMessage(
-      "❒❒ BOT CONNECTED ❒❒\n=====================\n\n┏━━━━ 🖤 ━━━━┓\n   ✦❥⋆⃝Yameen ✦ \n┗━━━    🖤 ━━━━┛",
+      "❒❒ BOT CONNECTED ❒❒\n=====================\n┏━━━━ 🖤 ━━━━┓\n   ✦❥⋆⃝Yameen ✦ \n┗━━━    🖤 ━━━━┛",
       threadID
     );
   }
