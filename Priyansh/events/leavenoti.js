@@ -17,14 +17,14 @@ module.exports.run = async function({ api, event, Users, Threads }) {
         const { threadID } = event;
         const data = global.data.threadData.get(parseInt(threadID)) || (await Threads.getData(threadID)).data;
         const name = global.data.userName.get(event.logMessageData.leftParticipantFbId) || await Users.getNameUser(event.logMessageData.leftParticipantFbId);
-        const type = (event.author == event.logMessageData.leftParticipantFbId) ? "left the group" : "Kicked by administrator";
+        const type = (event.author == event.logMessageData.leftParticipantFbId) ? "Left the group" : "Kicked by administrator";
         const path = join(__dirname, "cache", "leaveGif");
         const gifPath = join(path, `${threadID}.gif`);
         var msg, formPush
 
         if (existsSync(path)) mkdirSync(path, { recursive: true });
 
-        (typeof data.customLeave == "undefined") ? msg = "Goodbye {name} \n\n{type} Bohot Afsoos 🥺" : msg = data.customLeave;
+        (typeof data.customLeave == "undefined") ? msg = "─── ❝ GOOD BYE ❞ ───\n\n『 ✦ {name} Has Departed From The Group ✦ 』\n\n✩ Reason ✩ ➤ ✩ {type} ✩\n\n☣ Good Bye Friend But Always Remember The Time We Spent Together" : msg = data.customLeave;
         msg = msg.replace(/\{name}/g, name).replace(/\{type}/g, type);
 
         if (existsSync(gifPath)) formPush = { body: msg, attachment: createReadStream(gifPath) }
