@@ -1,73 +1,88 @@
-module.exports.config = {
-        name: "join",
-        eventType: ["log:subscribe"],
-        version: "1.0.1",
-        credits: "Deku",
-        description: "Notify bots or people entering the group",
-        dependencies: {
-                "fs-extra": ""
-        }
-};
-module.exports.run = async function({ api, event }) {
+const fs = require("fs-extra");
+const path = require("path");
 const request = require("request");
-        const { threadID } = event;
-        if (event.logMessageData.addedParticipants.some(i => i.userFbId == api.getCurrentUserID())) {
-                api.changeNickname(`👉 ${global.config.PREFIX} 👈 ${(!global.config.BOTNAME) ? " " : global.config.BOTNAME}`, threadID, api.getCurrentUserID());
-                return api.sendMessage(`≪══════◄••❀••►══════≫\n\n𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗲𝗱 𝗦𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆!
-𝗧𝗵𝗮𝗻𝗸 𝗬𝗼𝘂 𝗙𝗼𝗿 𝗖𝗵𝗼𝗼𝘀𝗶𝗻𝗴\n\n ┏━━━━ 🖤 ━━━━┓\n   ${global.config.BOTNAME}\n ┗━━━    🖤 ━━━━┛ \n\n𝗕𝗼𝗧, 𝗛𝗮𝘃𝗲 𝗙𝘂𝗻 𝗨𝘀𝗶𝗻𝗴 𝗶𝘁 ❀\n\n☆𝗕𝗼𝗧 𝗢𝘄𝗻𝗲𝗿☆ \n\n╔════•|🖤|•════╗           ✦❥⋆⃝YAMEEN ✦\n╚════•|🖤|•════╝
-\n\n≪══════◄••❀••►══════≫`, threadID, (e, info) => {
-      setTimeout(() => {
-        api.sendMessage({sticker: 568554150208913}, event.threadID);
-      }, 100)
-    })/*api.sendMessage(`${global.config.BOTNAME} Connected successfully!
-Thank you for choosing ${global.config.BOTNAME} bot, have fun using it.`, threadID, (e, info) => {
-      setTimeout(() => {
-        api.sendMessage({sticker: 568554150208913}, event.threadID);
-      }, 100)
-    })*/
-        }
-        else {
-                try {
-    const request = require("request");
-                        const fs = global.nodemodule["fs-extra"];
-                        let { threadName, participantIDs, imageSrc } = await api.getThreadInfo(threadID);
-var threadInfo = await api.getThreadInfo(threadID);
-                        const threadData = global.data.threadData.get(parseInt(threadID)) || {};                
-                        var mentions = [], nameArray = [], memLength = [], i = 0;
-    let addedParticipants1 = event.logMessageData.addedParticipants;
-        for (let newParticipant of addedParticipants1) {
-   let userID = newParticipant.userFbId
-api.getUserInfo(parseInt(userID), (err, data) => {
-      if(err){ return console.log(err)}
-     var obj = Object.keys(data);
-  var tite = ["https://i.imgur.com/oeyVcRU.jpg", "https://i.imgur.com/qDG55dz.jpg", "https://i.imgur.com/4GGnm3O.jpg", "https://i.imgur.com/cak3TM4.jpg"];
-  var linkava1 = tite[Math.floor(Math.random() * tite.length)];
-     var linkava = ["https://i.imgur.com/EsQBZY4.jpg"];
-    var userName = data[obj].name.replace("@", "");
-  if (userID !== api.getCurrentUserID()) {  
-                                nameArray.push(userName);
-                                mentions.push({ tag: userName, id: userID, fromIndex: 0 });
-memLength.push(participantIDs.length - i++);
-memLength.sort((a, b) => a - b);
-(typeof threadData.customJoin == "undefined") ? msg = "𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐓𝐨 𝐎𝐮𝐫 𝐆𝐫𝐨𝐮𝐩 🌹" : msg = threadData.customJoin;
-                        msg = msg
-                        .replace(/\{uName}/g, nameArray.join(', '))
-                        .replace(/\{type}/g, (memLength.length > 1) ?  'you' : 'Friend')
-                        .replace(/\{soThanhVien}/g, memLength.join(', '))
-                        .replace(/\{threadName}/g, threadName);                        
-var random1 = [`https://api.popcat.xyz/welcomecard?background=${tite}&text1=${userName}&text2=Welcome+To+${threadName}&text3=You+Are+The ${participantIDs.length}th+Member&avatar=https://i.ibb.co/KjgXrL2S/aeeabb31ab793a3d2ab28d2b59561b3d.jpg`];
-  var randomm = random1[Math.floor(Math.random() * random1.length)];    
-        let callback = function () {
-         return api.sendMessage({body: msg, attachment: fs.createReadStream(__dirname + `/cache/come.jpg`), mentions
-                    }, event.threadID, () => fs.unlinkSync(__dirname + `/cache/come.jpg`));
 
-                };
-                request(encodeURI(randomm)).pipe(fs.createWriteStream(__dirname + `/cache/come.jpg`)).on("close", callback);
-     }
-})
-        }
-    }catch (err) {
-            return console.log("ERROR: "+err);
+//━━━━ 🖤 ━━━━ JOIN NOTIFICATION MODULE ━━━━ 🖤 ━━━━
+module.exports.config = {
+  name: "joinNoti",
+  eventType: ["log:subscribe"],
+  version: "1.0.6",
+  credits: "Remade by  ChatGPT | Base: Mirai Team",
+  description: "Sends a welcome image and message when a new user or bot joins the group."
+};
+
+const backgroundImages = [
+  "https://i.postimg.cc/660hZC9q/a464b6e7101687a156ab6d6739aa152b.jpg",
+  "https://i.postimg.cc/2yVN4rBS/917a39ad1ae5480a7ff01b6ecc799692.jpg",
+  "https://i.postimg.cc/sGKDGJvg/0c5b19769ca3ff32e1af7937f8c4f3fa.jpg",
+  "https://i.postimg.cc/QFCV5vgG/47a9f336d3d8bf8833e03f761977d749.jpg",
+  "https://i.postimg.cc/njJ7tZgb/5e2097dec266d2028a90d65b36d7e6f9.jpg",
+  "https://i.postimg.cc/v4KLkJGb/927047970a986c0b61fa11a4ce2d7e5f.jpg"
+];
+
+//━━━━ 🖤 ━━━━ MAIN FUNCTION ━━━━ 🖤 ━━━━
+module.exports.run = async function ({ api, event, Users }) {
+  const { threadID } = event;
+  const botID = api.getCurrentUserID();
+
+  // Bot added to group
+  if (event.logMessageData.addedParticipants.some(i => i.userFbId == botID)) {
+    api.changeNickname(`[ ${global.config.PREFIX} ] • ${global.config.BOTNAME || "Bot"}`, threadID, botID);
+    return api.sendMessage(
+      "❒❒ BOT CONNECTED ❒❒\n=====================\n\n┏━━━━ 🖤 ━━━━┓
+   ✦❥⋆⃝YameenK99 ✦ 
+┗━━━    🖤 ━━━━┛\n\n=====================\n[]---------------------------------------[]\n ❒❒\n=====================\n",
+      threadID
+    );
+  }
+
+  // User(s) added
+  try {
+    const { threadName, participantIDs, imageSrc: groupIconUrl } = await api.getThreadInfo(threadID);
+    const threadData = global.data.threadData.get(parseInt(threadID)) || {};
+    const addedUsers = event.logMessageData.addedParticipants;
+
+    const defaultMsg = `Hello {userName}! Welcome to {threadName}\nYou're the {memberCount}th member of this group. Enjoy your stay! 🎉`;
+
+    for (const user of addedUsers) {
+      const userID = user.userFbId;
+      const userName = user.fullName;
+      const memberCount = participantIDs.length;
+      const randomBg = backgroundImages[Math.floor(Math.random() * backgroundImages.length)];
+      const avatarUrl = `https://graph.facebook.com/${userID}/picture?width=720&height=720&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`;
+
+      const welcomeImageUrl = `https://koja-api.web-server.xyz/welcome?username=${encodeURIComponent(userName)}&avatarUrl=${encodeURIComponent(avatarUrl)}&groupname=${encodeURIComponent(threadName)}&bg=${encodeURIComponent(randomBg)}&memberCount=${memberCount}&groupIcon=${encodeURIComponent(groupIconUrl || 'https://i.pinimg.com/videos/thumbnails/originals/07/9a/15/079a1550baf49469b2a3e50e921b9641.0000000.jpg')}`;
+
+      const messageTemplate = threadData.customJoin || defaultMsg;
+
+      const formattedMsg = messageTemplate
+        .replace(/\{userName}/g, userName)
+        .replace(/\{name}/g, userName) // also support {name}
+        .replace(/\{threadName}/g, threadName)
+        .replace(/\{soThanhVien}/g, memberCount)
+        .replace(/\{memberCount}/g, memberCount)
+        .replace(/\{type}/g, "you");
+
+      const filePath = path.join(__dirname, "cache", "welcome.jpg");
+
+      const callback = () => {
+        api.sendMessage({
+          body: formattedMsg,
+          attachment: fs.createReadStream(filePath),
+          mentions: [{ tag: userName, id: userID }]
+        }, threadID, () => fs.unlinkSync(filePath));
+      };
+
+      request(welcomeImageUrl).pipe(fs.createWriteStream(filePath)).on("close", callback);
+
+      // Save new user data
+      if (!global.data.allUserID.includes(userID)) {
+        await Users.createData(userID, { name: userName, data: {} });
+        global.data.userName.set(userID, userName);
+        global.data.allUserID.push(userID);
+      }
     }
-        }
-     }
+  } catch (error) {
+    console.error("//━━━━ 🖤 ━━━━ JOIN NOTI ERROR ━━━━ 🖤 ━━━━", error);
+  }
+};
