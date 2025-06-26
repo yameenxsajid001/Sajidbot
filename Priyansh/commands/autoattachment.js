@@ -13,7 +13,7 @@ module.exports.handleEvent = async function({ api, event, Users }) {
   // Check if the message contains attachments (image, audio, video, file, etc.)
   if (event.attachments && event.attachments.length > 0) {
     // React to the message (🌹)
-    api.setMessageReaction("🥳", event.messageID, () => {}, true);
+    api.setMessageReaction("❤️", event.messageID, () => {}, true);
 
     // Get the user's name
     let userName = "there";
@@ -22,7 +22,7 @@ module.exports.handleEvent = async function({ api, event, Users }) {
     } catch (e) {}
 
     // Customize the reply message as you wish
-    const replyMsg = `${userName} Very Nice 👌, ${userName}!Super SS`;
+    const replyMsg = `${userName}\nAmazing 👌,`;
 
     // Send the reply
     api.sendMessage(replyMsg, event.threadID, event.messageID);
