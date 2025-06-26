@@ -16,7 +16,7 @@ module.exports.languages = {
 		"missingReply": "Hãy reply tin nhắn cần gỡ."
 	},
 	"en": {
-		"returnCant": "Aby LoL Main Kisi 0or Ka Msg Q Unsent Krun 😒",
+		"returnCant": "Aby Dakkan Main Kisi Or Lol KA Msg Q Unsent Krun 😒",
 		"missingReply": "BaBe RePly Kro Us Msg Ka J0o UnSent KRrna"
 	}
 }
