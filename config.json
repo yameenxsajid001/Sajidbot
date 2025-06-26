@@ -8,7 +8,7 @@
     "allowInbox": true,
     "autoClean": true,
     "commandDisabled": [
-        "sim.js"
+        "auto-reply.js"
     ],
     "eventDisabled": [
         ""
