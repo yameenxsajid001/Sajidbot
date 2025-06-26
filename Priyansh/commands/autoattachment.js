@@ -22,9 +22,7 @@ module.exports.handleEvent = async function({ api, event, Users }) {
     } catch (e) {}
 
     // Customize the reply message as you wish
-    const replyMsg = `┏━━━━ 🖤 ━━━━┓\n
-   ✦NICE ✦ ONE ✦\n 
-┗━━━    🖤 ━━━━┛,`;
+    const replyMsg = `✦ NICE ✦ ONE ✦`;
 
     // Send the reply
     api.sendMessage(replyMsg, event.threadID, event.messageID);
