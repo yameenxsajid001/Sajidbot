@@ -1,51 +1,42 @@
-// Module configuration for the automention command
 module.exports.config = {
-  name: "automention",                // Name of the command/module
-  version: "1.0.0",                   // Version number
-  hasPermssion: 0,                    // Permission required (0 = everyone)
-  credits: "𝐂𝐘𝐁𝐄𝐑 ☢️_𖣘 -𝐁𝐎𝐓 ⚠️ 𝑻𝑬𝑨𝑴_ ☢️", // Credit to the original author/team
-  description: "Bot will reply when you tag admin or tag bot", // Command description
-  commandCategory: "Other",           // Category in the command list
-  usages: '',                         // Usage instructions (none)
-  cooldowns: 1                        // Cooldown time (in seconds)
+  name: "automention",
+  version: "1.0.0",
+  hasPermssion: 0, // 0 = anyone can trigger
+  credits: "yameenxsajid001",
+  description: "Auto reply when someone mentions the boss/admin.",
+  commandCategory: "other",
+  usages: "",
+  cooldowns: 1
 };
 
-// Handles events, particularly messages where the admin/boss is mentioned
-module.exports.handleEvent = function ({
-  api,      // Facebook Messenger API object
-  event     // Event object (message, sender, mentions, etc.)
-}) {
-  // Only respond if the sender is NOT the boss (ID 1199760804)
-  if (event.senderID !== "1199760804") {
-    // List of special user IDs (the boss)
-    var bossIDs = ["1199760804"];
-    // Check if the message mentions the boss
-    for (const bossID of bossIDs) {
-      // If the only mention in the message is the boss's ID
-      if (Object.keys(event.mentions) == bossID) {
-        // List of possible funny/defensive replies
-        var replies = [
-          "Don't Mention My Boss 😒",
-          "Aby Oye 😂 Mje Mention Do Boss Ko Nai 😁",
-          "Pyaari Aunty Boss Busy Hain 😏",
-          "Lol Uncle Mera Boss Busy Hain 😂",
-          "Ye Le Eggs Kha 👉🥚🥚 Or Mention Krna Band Kro 😕",
-          "If you are a girl, go to the boss's inbox.",
-          "Boss is busy now, if you want to say anything, go to inbox and tell",
-          "Boss is in a meeting with me now, don't mention 🙂",
-          "Boss is busy now tell me what do you say",
-          "Don't mention, say boss 🥵💋",
-          "Assalamu Alaikum",
-          "Mjh Main Kia Kami Hai 😒 Mje mention Kr 🙈🙈"
-        ];
-        // Reply with a random message from the list
-        return api.sendMessage({
-          body: replies[Math.floor(Math.random() * replies.length)]
-        }, event.threadID, event.messageID);
-      }
+module.exports.handleEvent = function({ api, event }) {
+  // Replace with the boss/admin's Facebook User ID as a string
+  const bossIDs = ["1199760804"]; // Example: ["1199760804"]
+
+  // Ignore if the sender is the boss themself
+  if (bossIDs.includes(event.senderID)) return;
+
+  // Check if any of the boss IDs are mentioned
+  for (const bossID of bossIDs) {
+    if (Object.keys(event.mentions).includes(bossID)) {
+      const replies = [
+        "Don't mention my boss 😒",
+        "Hey! Please don't tag the boss 😁",
+        "Boss is busy right now, please avoid tagging.",
+        "The boss is in a meeting, drop your message here.",
+        "Try not to disturb the boss, thanks!",
+        "If urgent, send your message in private.",
+        "Walaikum Assalam, but boss is unavailable.",
+        "Please talk to me if you need anything!"
+      ];
+      // Send a random reply
+      return api.sendMessage(
+        replies[Math.floor(Math.random() * replies.length)],
+        event.threadID,
+        event.messageID
+      );
     }
   }
 };
 
-// No operation for the main 'run' command (not used here)
-module.exports.run = async function ({}) {};
+module.exports.run = async function({}) {};
