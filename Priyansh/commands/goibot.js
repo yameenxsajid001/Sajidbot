@@ -1,10 +1,10 @@
 const fs = global.nodemodule["fs-extra"];
 module.exports.config = {
-  name: "goibot",
+  name: "bot",
   version: "1.0.1",
   hasPermssion: 0,
   credits: "Mod by John Lester",
-  description: "goibot",
+  description: "noprefix",
   commandCategory: "Noprefix",
   usages: "noprefix",
   cooldowns: 5,
@@ -494,7 +494,7 @@ if ((event.body.toLowerCase() == "sim miss you yr") || (event.body.toLowerCase()
   
   if (event.body.indexOf("bot") == 0 || (event.body.indexOf("Bot") == 0)) {
     var msg = {
-      body: `${name}, ${rand}`
+      body: `🌹${name}🌹,\n✍️ ${rand}✍️`
     }
     return api.sendMessage(msg, threadID, messageID);
   };
