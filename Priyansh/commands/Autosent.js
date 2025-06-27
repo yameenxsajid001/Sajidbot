@@ -2,15 +2,16 @@ const moment = require("moment-timezone");
 
 module.exports.config = {
   name: "autotime",
-  version: "10.02",
+  version: "1.0.0",
   hasPermssion: 0,
-  credits: "𝐂𝐘𝐁𝐄𝐑 ☢️_𖣘 -𝐁𝐎𝐓 ⚠️ 𝑻𝑬𝑨𝑴_𝑴_ ☢️",
-  description: "یہ خودکار پیغام رسانی ہے۔ وقت کے مطابق پیغام بھیجے گا۔",
+  credits: "yameenxsajid001",
+  description: "Automatically sends scheduled messages to all groups at set times (Pakistan time zone).",
   commandCategory: "group messenger",
   usages: "[]",
   cooldowns: 3
 };
 
+// Edit your schedule here (24-hour format: HH:mm:ss)
 const schedule = [
   { timer: "05:00:00", message: ["Sehri Ka Time Ho gya hai 😒"] },
   { timer: "07:00:00", message: ["Good Morning To All Members"] },
@@ -38,9 +39,8 @@ function getRandom(arr) {
 
 module.exports.onLoad = function(api) {
   setInterval(() => {
-    const now = moment().tz("Asia/Karachi");
-    const currentTime = now.format("HH:mm:ss");
-    const match = schedule.find(item => item.timer === currentTime);
+    const now = moment().tz("Asia/Karachi").format("HH:mm:ss");
+    const match = schedule.find(item => item.timer === now);
     if (match && global.allThreadID) {
       global.allThreadID.forEach(threadID => {
         api.sendMessage(getRandom(match.message), threadID);
