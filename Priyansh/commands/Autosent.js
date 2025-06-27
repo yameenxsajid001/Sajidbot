@@ -1,52 +1,70 @@
-const moment = require("moment-timezone");
-
 module.exports.config = {
   name: "autotime",
   version: "1.0.0",
   hasPermssion: 0,
   credits: "yameenxsajid001",
-  description: "Automatically sends scheduled messages to all groups at set times (Pakistan time zone).",
+  description: "Automatically sends scheduled messages to all groups.",
   commandCategory: "group messenger",
-  usages: "[]",
+  usages: "",
   cooldowns: 3
 };
 
-// Edit your schedule here (24-hour format: HH:mm:ss)
-const schedule = [
-  { timer: "05:00:00", message: ["Sehri Ka Time Ho gya hai 😒"] },
-  { timer: "07:00:00", message: ["Good Morning To All Members"] },
-  { timer: "08:00:00", message: ["It's Duty Time  Chalo Shabash"] },
-  { timer: "09:00:00", message: ["It's Breakfast Time Chalo Sab Nashta Karlo 😋"] },
-  { timer: "10:00:00", message: ["This Is Food Time Chalo Shabash Larkiyon Sabzi Banana start Kro 🔪🧄🍍"] },
-  { timer: "11:00:00", message: ["Pora 11:00 ho gye"] },
-  { timer: "12:00:00", message: ["Doop se Banda kala ho jata it's 12:00"] },
-  { timer: "13:00:00", message: ["Chalo Haajio Namaz time ho gya"] },
-  { timer: "14:00:00", message: ["Agar bhok lagi hai to Khana Kha lo it's 02:00"] },
-  { timer: "15:00:00", message: ["Ts Rest time so jao sab"] },
-  { timer: "16:00:00", message: ["Tea 🍵 Time it's 04:00"] },
-  { timer: "17:00:00", message: ["Drink 🍷 time 😏"] },
-  { timer: "18:00:00", message: ["It's Halwa pori time 😒"] },
-  { timer: "19:00:00", message: ["It's Game time lest play"] },
-  { timer: "20:00:00", message: ["Mode off"] },
-  { timer: "21:00:00", message: ["Mode on"] },
-  { timer: "22:00:00", message: ["Hello everyone kese hu sab"] },
-  { timer: "23:00:00", message: ["Good night to all members"] }
+// Change this to your preferred timezone, e.g. 'Asia/Dhaka', 'America/New_York'
+const TIMEZONE = 'UTC';
+
+const SCHEDULE = [
+  {
+    time: "08:00 AM",
+    messages: [
+      "Good morning, everyone!"
+    ]
+  },
+  {
+    time: "01:00 PM",
+    messages: [
+      "Time for lunch!"
+    ]
+  },
+  {
+    time: "05:30 PM",
+    messages: [
+      "Good evening!"
+    ]
+  }
 ];
 
-function getRandom(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
+function getCurrentTimeString() {
+  // Use the system timezone (can be changed to use a library like moment-timezone for more options)
+  const now = new Date();
+  // Adjust for timezone if needed
+  // NOTE: For server in UTC, no change. For other timezones, use a library.
+  return now.toLocaleTimeString('en-US', { hour12: true, hour: '2-digit', minute: '2-digit', second: '2-digit' });
 }
 
-module.exports.onLoad = function(api) {
+module.exports.onLoad = function (api) {
   setInterval(() => {
-    const now = moment().tz("Asia/Karachi").format("HH:mm:ss");
-    const match = schedule.find(item => item.timer === now);
-    if (match && global.allThreadID) {
-      global.allThreadID.forEach(threadID => {
-        api.sendMessage(getRandom(match.message), threadID);
+    const now = new Date();
+    // To handle timezones robustly, you can use moment-timezone (if supported by your host):
+    // const now = require('moment-timezone')().tz(TIMEZONE);
+    // const currentTime = now.format('hh:mm A');
+    // But here we stick to vanilla JS for portability:
+
+    let hours = now.getUTCHours();
+    let minutes = now.getUTCMinutes();
+    let ampm = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12;
+    if (hours === 0) hours = 12;
+    let minuteStr = minutes < 10 ? "0" + minutes : "" + minutes;
+    let currentTime = `${hours < 10 ? "0" + hours : hours}:${minuteStr} ${ampm}`;
+
+    const scheduleItem = SCHEDULE.find(item => item.time === currentTime);
+    if (scheduleItem) {
+      global.data.allThreadID.forEach(threadID => {
+        const message = scheduleItem.messages[Math.floor(Math.random() * scheduleItem.messages.length)];
+        api.sendMessage(message, threadID);
       });
     }
-  }, 60 * 1000); // every minute
+  }, 60 * 1000); // Check every minute
 };
 
 module.exports.run = () => {};
